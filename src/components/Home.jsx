@@ -4,12 +4,14 @@ import Topnav from "./templates/Topnav";
 import Header from "./templates/Header";
 import axios from "../utils/axios";
 import TrendingCards from "./templates/TrendingCards";
+import Dropdown from "./templates/Dropdown";
 
 const Home = () => {
   document.title = "FlixDB | Homepage";
 
   const [headerData, setHeaderData] = useState(null);
   const [trendingData, setTrendingData] = useState(null);
+  const [category, setCategory] = useState("all");
 
   const getHeaderData = async () => {
     const { data } = await axios.get("/trending/all/day");
@@ -21,21 +23,30 @@ const Home = () => {
   };
 
   const getTrendingData = async () => {
-    const { data } = await axios.get("/trending/all/day");
+    const { data } = await axios.get(`/trending/${category}/day`);
 
     setTrendingData(data.results);
   };
 
   useEffect(() => {
     !headerData && getHeaderData();
-    !trendingData && getTrendingData();
-  }, []);
+    getTrendingData();
+  }, [category]);
   return headerData && trendingData ? (
     <>
       <Sidenav />
       <div className="w-[80%] h-full overflow-auto overflow-x-hidden">
         <Topnav />
         <Header data={headerData} />
+
+        <div className="flex justify-between p-5">
+          <h1 className="text-3xl font-semibold text-zinc-400">Trending</h1>
+          <Dropdown
+            title="Filter"
+            options={["tv", "movie", "all"]}
+            func={(e) => setCategory(e.target.value)}
+          />
+        </div>
         <TrendingCards data={trendingData} />
       </div>
     </>

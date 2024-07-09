@@ -33,7 +33,7 @@ select {
     
     border: 0 !important;
     
-    background: #27272a;
+    background: #27272a ;
     
     background-image: none;
     
@@ -57,26 +57,26 @@ select {
     
     }
     
-    select {
+    .select {
     
     position: relative;
     
     display: flex;
     
-    width: 20em;
+    width: 10em;
     
     height: 3em;
     
     line-height: 3;
     
-    background: #27272a;
+    background: #27272a ;
     
     overflow: hidden;
     
     border-radius: 0.25em;
     
     }
-    
+    /* //#27272a */
     .select::after {
     
     content: "\25BC";
@@ -87,7 +87,7 @@ select {
     
     right: 0; padding: 0 1em;
     
-    background: #27272a;
+    background: #27272a ;
     
     cursor: pointer;
     
@@ -102,3 +102,11 @@ select {
     color: #6556cd;
     
     }
+/* 
+    select {
+        color: #333333;
+        font-family: cursive;
+        inline-size: 100%;
+        font-size: 11px;
+      }
+       */
