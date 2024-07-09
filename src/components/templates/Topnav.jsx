@@ -52,7 +52,7 @@ const Topnav = () => {
                   ? `https://image.tmdb.org/t/p/original/${
                       s.backdrop_path || s.poster_path || s.profile_path
                     }`
-                  : "../../../public/noImage.jpg"
+                  : "../../../noImage.jpg"
               }
               alt=""
             />

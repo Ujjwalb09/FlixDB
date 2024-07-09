@@ -5,7 +5,10 @@ const TrendingCards = ({ data, setCategory }) => {
   return (
     <div className="w-[100%] flex overflow-y-hidden p-5 mb-5">
       {data.map((d, i) => (
-        <div key={i} className="bg-zinc-900 min-w-[15%] mr-5 mb-5">
+        <div
+          key={i}
+          className="bg-zinc-900 min-w-[15%] mr-5 mb-5 hover:scale-105"
+        >
           <img
             className="w-full h-[55%] object-cover"
             src={`https://image.tmdb.org/t/p/original/${
