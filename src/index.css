@@ -33,7 +33,7 @@ select {
     
     border: 0 !important;
     
-    background: #27272a ;
+    background: #F7F9F2;
     
     background-image: none;
     
@@ -41,7 +41,7 @@ select {
     
     padding: 0 0.5em;
     
-    color: #fff;
+    color: black;
     
     cursor: pointer;
     
@@ -63,17 +63,17 @@ select {
     
     display: flex;
     
-    width: 10em;
+    width: 7em;
     
     height: 3em;
     
     line-height: 3;
     
-    background: #27272a ;
+    background: #F7F9F2;
     
     overflow: hidden;
     
-    border-radius: 0.25em;
+    border-radius: 0.5em;
     
     }
     /* //#27272a */
@@ -87,7 +87,7 @@ select {
     
     right: 0; padding: 0 1em;
     
-    background: #27272a ;
+    background: #F7F9F2;
     
     cursor: pointer;
     
@@ -99,7 +99,7 @@ select {
     
     .select:hover::after {
     
-    color: #6556cd;
+    color: #E9C46A;
     
     }
 /* 
