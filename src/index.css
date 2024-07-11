@@ -33,7 +33,7 @@ select {
     
     border: 0 !important;
     
-    background: #F7F9F2;
+    background: #28282c;
     
     background-image: none;
     
@@ -41,7 +41,7 @@ select {
     
     padding: 0 0.5em;
     
-    color: black;
+    color: #fff;
     
     cursor: pointer;
     
@@ -63,13 +63,13 @@ select {
     
     display: flex;
     
-    width: 7em;
+    width: 8em;
     
     height: 3em;
     
     line-height: 3;
     
-    background: #F7F9F2;
+    background: #28282c;
     
     overflow: hidden;
     
@@ -87,7 +87,7 @@ select {
     
     right: 0; padding: 0 1em;
     
-    background: #F7F9F2;
+    background: #28282c;
     
     cursor: pointer;
     

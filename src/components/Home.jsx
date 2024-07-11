@@ -5,6 +5,9 @@ import Header from "./templates/Header";
 import axios from "../utils/axios";
 import TrendingCards from "./templates/TrendingCards";
 import Dropdown from "./templates/Dropdown";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import Loading from "./Loading";
 
 const Home = () => {
   document.title = "FlixDB | Homepage";
@@ -51,7 +54,7 @@ const Home = () => {
       </div>
     </>
   ) : (
-    <h1>Loading....</h1>
+    <Loading />
   );
 };
 
