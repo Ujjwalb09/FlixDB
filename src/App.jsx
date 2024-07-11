@@ -6,7 +6,7 @@ import Loading from "./components/Loading";
 import Trending from "./components/Trending";
 
 const App = () => {
-  const locomotiveScroll = new LocomotiveScroll();
+  // const locomotiveScroll = new LocomotiveScroll();
   return (
     <div className="bg-[#1F1E24] w-screen h-screen flex">
       <Routes>
