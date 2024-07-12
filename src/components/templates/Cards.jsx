@@ -10,7 +10,7 @@ const Cards = ({ data }) => {
     <div className="flex flex-wrap w-full h-full px-[5%] bg-[#1F1E24] mt-12">
       {data.map((d, i) => (
         <Link
-          className="relative w-[200px] mr-[5%] mb-[5%] hover:scale-105 transition-transform duration-300"
+          className="relative w-[250px] mr-[5%] mb-[5%] hover:scale-105 transition-transform duration-300 ml-16"
           key={i}
           onMouseEnter={() => setHoveredIndex(i)}
           onMouseLeave={() => setHoveredIndex(null)}

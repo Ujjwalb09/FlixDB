@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Topnav from "./templates/Topnav";
 import Dropdown from "./templates/Dropdown";
 import axios from "../utils/axios";
@@ -51,12 +51,19 @@ const Trending = () => {
 
   return trendingData.length > 0 ? (
     <div className="w-screen h-screen">
-      <div className="px-[5%] w-full flex items-center justify-between">
-        <h1 className=" text-2xl font-semibold text-zinc-400">
+      <div className="fixed top-0 left-0 w-full bg-black z-10 px-[5%] flex items-center justify-between h-16">
+        <h1 className="flex text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate("/")}
-            className="hover:text-[#E9C46A] ri-arrow-left-line"
+            className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
           ></i>{" "}
+          <Link to="/">
+            <i className="text-[#E9C46A] ri-tv-fill mr-2"></i>
+            <span className=" text-[#E7F0DC] mr-2">
+              Flix<span className="text-[#E9C46A]">DB</span>
+            </span>
+          </Link>{" "}
+          {" | "}
           Trending
         </h1>
         <div className="flex items-center w-[80%]">
@@ -79,14 +86,16 @@ const Trending = () => {
         </div>
       </div>
 
-      <InfiniteScroll
-        dataLength={trendingData.length}
-        next={getTrendingData}
-        hasMore={hasMore}
-        loader={<h1>Loading...</h1>}
-      >
-        <Cards data={trendingData} title={category} />
-      </InfiniteScroll>
+      <div className="pt-20">
+        <InfiniteScroll
+          dataLength={trendingData.length}
+          next={getTrendingData}
+          hasMore={hasMore}
+          loader={<h1>Loading...</h1>}
+        >
+          <Cards data={trendingData} title={category} />
+        </InfiniteScroll>
+      </div>
     </div>
   ) : (
     <Loading />

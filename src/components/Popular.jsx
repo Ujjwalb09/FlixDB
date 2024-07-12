@@ -1,6 +1,6 @@
 import axios from "../utils/axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Cards from "./templates/Cards";
@@ -43,16 +43,20 @@ const Popular = () => {
 
   return popularData.length > 0 ? (
     <div className="w-screen h-screen">
-      <div className="px-[5%] w-full flex items-center justify-between">
-        <h1 className=" text-2xl font-semibold text-zinc-400">
+      <div className="fixed top-0 left-0 w-full bg-black z-10 px-[5%] flex items-center justify-between h-16">
+        <h1 className="flex text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate("/")}
-            className="hover:text-[#E9C46A] ri-arrow-left-line"
+            className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
           ></i>{" "}
-          Popular {"|"}{" "}
-          <small className="text-zinc-500 text-md">
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </small>
+          <Link to="/">
+            <i className="text-[#E9C46A] ri-tv-fill mr-2"></i>
+            <span className=" text-[#E7F0DC] mr-2">
+              Flix<span className="text-[#E9C46A]">DB</span>
+            </span>
+          </Link>{" "}
+          {" | "}
+          Popular
         </h1>
         <div className="flex items-center w-[80%]">
           <div className="w-[90%]">
@@ -67,14 +71,16 @@ const Popular = () => {
         </div>
       </div>
 
-      <InfiniteScroll
-        dataLength={popularData.length}
-        next={getPopularData}
-        hasMore={hasMore}
-        loader={<h1>Loading...</h1>}
-      >
-        <Cards data={popularData} title={category} />
-      </InfiniteScroll>
+      <div className="pt-20">
+        <InfiniteScroll
+          dataLength={popularData.length}
+          next={getPopularData}
+          hasMore={hasMore}
+          loader={<h1>Loading...</h1>}
+        >
+          <Cards data={popularData} title={category} />
+        </InfiniteScroll>
+      </div>
     </div>
   ) : (
     <Loading />
