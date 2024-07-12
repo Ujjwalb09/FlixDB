@@ -1,55 +1,47 @@
+import axios from "../utils/axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Topnav from "./templates/Topnav";
-import Dropdown from "./templates/Dropdown";
-import axios from "../utils/axios";
-import Cards from "./templates/Cards";
 import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Cards from "./templates/Cards";
+import Topnav from "./templates/Topnav";
+import Dropdown from "./templates/Dropdown";
 
-const Trending = () => {
+const Popular = () => {
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState("all");
-  const [duration, setDuration] = useState("week");
-  const [trendingData, setTrendingData] = useState([]);
+  const [category, setCategory] = useState("movie");
+  const [popularData, setPopularData] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  document.title = "FlixDB | Trending ";
-
-  const getTrendingData = async () => {
-    const { data } = await axios.get(
-      `/trending/${category}/${duration}?page=${page}`
-    );
+  document.title = "FlixDB | Popular ";
+  const getPopularData = async () => {
+    const { data } = await axios.get(`${category}/popular?page=${page}`);
 
     if (data.results.length > 0) {
-      setTrendingData((prevState) => [...prevState, ...data.results]);
+      setPopularData((prevState) => [...prevState, ...data.results]);
       setPage(page + 1);
     } else {
       setHasMore(false);
     }
-
-    console.log(data);
-
-    // setTrendingData(data.results);
   };
 
   const refreshHandler = () => {
-    if (trendingData.length === 0) {
-      getTrendingData();
+    if (popularData.length === 0) {
+      getPopularData();
     } else {
       setPage(1);
-      setTrendingData([]);
-      getTrendingData();
+      setPopularData([]);
+      getPopularData();
     }
   };
 
   useEffect(() => {
     refreshHandler();
-  }, [category, duration]);
+  }, [category]);
 
-  return trendingData.length > 0 ? (
+  return popularData.length > 0 ? (
     <div className="w-screen h-screen">
       <div className="px-[5%] w-full flex items-center justify-between">
         <h1 className=" text-2xl font-semibold text-zinc-400">
@@ -57,7 +49,7 @@ const Trending = () => {
             onClick={() => navigate("/")}
             className="hover:text-[#E9C46A] ri-arrow-left-line"
           ></i>{" "}
-          Trending
+          Popular
         </h1>
         <div className="flex items-center w-[80%]">
           <div className="w-[90%]">
@@ -66,26 +58,19 @@ const Trending = () => {
           <Dropdown
             value={category}
             title="Category"
-            options={["movie", "tv", "all"]}
+            options={["movie", "tv"]}
             func={(e) => setCategory(e.target.value)}
-          />
-          <div className="w-[2%]"></div>
-          <Dropdown
-            value={duration}
-            title="Duration"
-            options={["week", "day"]}
-            func={(e) => setDuration(e.target.value)}
           />
         </div>
       </div>
 
       <InfiniteScroll
-        dataLength={trendingData.length}
-        next={getTrendingData}
+        dataLength={popularData.length}
+        next={getPopularData}
         hasMore={hasMore}
         loader={<h1>Loading...</h1>}
       >
-        <Cards data={trendingData} title={category} />
+        <Cards data={popularData} title={category} />
       </InfiniteScroll>
     </div>
   ) : (
@@ -93,4 +78,4 @@ const Trending = () => {
   );
 };
 
-export default Trending;
+export default Popular;

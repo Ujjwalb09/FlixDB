@@ -27,7 +27,10 @@ const Sidenav = () => {
         >
           <i className="ri-fire-fill"></i> Trending
         </Link>
-        <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5">
+        <Link
+          to="/popular"
+          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+        >
           <i className="ri-bard-fill"></i> Popular
         </Link>
         <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5">
