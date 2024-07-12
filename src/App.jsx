@@ -6,6 +6,8 @@ import Loading from "./components/Loading";
 import Trending from "./components/Trending";
 import Popular from "./components/Popular";
 import Movies from "./components/Movies";
+import TvShows from "./components/TvShows";
+import People from "./components/People";
 
 const App = () => {
   // const locomotiveScroll = new LocomotiveScroll();
@@ -16,6 +18,8 @@ const App = () => {
         <Route path="/trending" element={<Trending />} />
         <Route path="/popular" element={<Popular />} />
         <Route path="/movies" element={<Movies />} />
+        <Route path="/tv_shows" element={<TvShows />} />
+        <Route path="/people" element={<People />} />
       </Routes>
     </div>
   );
