@@ -16,7 +16,11 @@ const Dropdown = ({ title, options, func, value }) => {
         </option>
         {options.map((o, i) => (
           <option key={i} value={o}>
-            {o.toUpperCase()}
+            {o
+              .toLowerCase()
+              .split("_")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
           </option>
         ))}
       </select>

@@ -21,7 +21,7 @@ const Topnav = () => {
   return (
     <div className="max-w-screen-md h-[10vh] flex justify-start items-center relative mx-auto ">
       <i
-        className="text-zinc-400 text-3xl 
+        className="text-[#E9C46A] text-3xl 
       ri-search-line"
       ></i>
       <input
