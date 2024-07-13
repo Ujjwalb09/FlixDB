@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "./Dropdown";
 
-const TrendingCards = ({ data, setCategory }) => {
+const TrendingCards = ({ data }) => {
   return (
     <div className="w-[100%] flex overflow-y-hidden p-5 mb-5">
       {data.map((d, i) => (
