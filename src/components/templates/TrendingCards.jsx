@@ -1,11 +1,16 @@
 import React from "react";
-import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
 
 const TrendingCards = ({ data }) => {
   return (
     <div className="w-[100%] flex overflow-y-hidden p-5 mb-5">
       {data.map((d, i) => (
-        <div
+        <Link
+          to={
+            d.media_type == "movie"
+              ? `/movies/details/${d.id}`
+              : `/tv_shows/details/${d.id}`
+          }
           key={i}
           className="bg-zinc-900 min-w-[15%] mr-5 mb-5 hover:scale-105"
         >
@@ -26,7 +31,7 @@ const TrendingCards = ({ data }) => {
               <span className="text-zinc-500"> more</span>
             </p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
