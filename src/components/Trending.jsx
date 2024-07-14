@@ -93,7 +93,7 @@ const Trending = () => {
           hasMore={hasMore}
           loader={<h1>Loading...</h1>}
         >
-          <Cards data={trendingData} title={category} />
+          <Cards data={trendingData} />
         </InfiniteScroll>
       </div>
     </div>

@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import CircularProgress from "./CircularProgress";
 
-const Cards = ({ data }) => {
-  console.log(data);
-
+const Cards = ({ data, title }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const location = useLocation();
-  const path = location.pathname.slice(1);
-
-  console.log(path);
+  // const location = useLocation();
+  // const path = location.pathname.slice(1);
 
   return (
     <div className="flex flex-wrap w-full h-full px-[5%] bg-[#1F1E24] mt-12">
@@ -18,9 +14,16 @@ const Cards = ({ data }) => {
         <Link
           to={
             !d.media_type
-              ? `/${path}/details/${"" + d.id}`
-              : `/${d.media_type}/details/${"" + d.id}`
+              ? `/${title}/details/${d.id}`
+              : d.media_type == "movie"
+              ? `/movies/details/${d.id}`
+              : `/tv_shows/details/${d.id}`
           }
+          // to={
+          //   !d.media_type
+          //     ? `/${path}/details/${"" + d.id}`
+          //     : `/${d.media_type}/details/${"" + d.id}`
+          // }
           className="relative w-[250px] mr-[5%] mb-[5%] hover:scale-105 transition-transform duration-300 ml-16"
           key={i}
           onMouseEnter={() => setHoveredIndex(i)}
