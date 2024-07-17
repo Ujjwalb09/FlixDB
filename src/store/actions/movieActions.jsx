@@ -1,5 +1,6 @@
 import axios from "../../utils/axios";
-export { loadmovie, removeMovie } from "../reducers/movieSlice";
+export { removeMovie } from "../reducers/movieSlice";
+import { loadMovie } from "../reducers/movieSlice";
 
 export const asyncLoadMovie = (id) => async (dispatch, getState) => {
   try {
@@ -13,13 +14,13 @@ export const asyncLoadMovie = (id) => async (dispatch, getState) => {
     let movieDetailsObj = {
       details: details.data,
       external_ids: external_ids.data,
-      recommendations: recommendations.data,
-      similar: similar.data,
-      videos: videos.data,
-      watchProvider: watchProvider.data,
+      recommendations: recommendations.data.results,
+      similar: similar.data.results,
+      videos: videos.data.results.find((obj) => obj.type === "Trailer"),
+      watchProvider: watchProvider.data.results.IN,
     };
 
-    console.log(movieDetailsObj);
+    dispatch(loadMovie(movieDetailsObj));
   } catch (error) {
     console.log(error);
   }

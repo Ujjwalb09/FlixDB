@@ -8,7 +8,7 @@ export const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    loadmovie: (state, action) => {
+    loadMovie: (state, action) => {
       state.info = action.payload;
     },
     removeMovie: (state, action) => {
@@ -18,6 +18,6 @@ export const movieSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { loadmovie, removeMovie } = movieSlice.actions;
+export const { loadMovie, removeMovie } = movieSlice.actions;
 
 export default movieSlice.reducer;
