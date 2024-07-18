@@ -3,6 +3,7 @@ import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
+import TrendingCards from "./templates/TrendingCards";
 
 const CircularProgress = ({ percentage }) => {
   const circleWidth = 60; // Increased from 39
@@ -60,12 +61,11 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     dispatch(asyncLoadMovie(id));
 
     return () => dispatch(removeMovie());
-  }, []);
+  }, [id]);
   return info ? (
     <div
       style={{
@@ -74,10 +74,10 @@ const MovieDetails = () => {
           info.details.poster_path ||
           info.details.profile_path
         })`,
-        backgroundPosition: "top 5%",
+        backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="w-screen h-screen px-[10%]"
+      className="w-screen h-[150vh] px-[10%]"
     >
       {/* {part 1 navigation} */}
       <nav className="h-[10vh] w-full text-zinc-200 flex gap-10 text-xl items-center">
@@ -157,12 +157,11 @@ const MovieDetails = () => {
         </div>
       </div>
 
-      {/* {part 3 available platforms/watchproviders} */}
-
+      {/*part 3 available platforms/watchproviders*/}
       <div className="w-[80%] flex flex-col gap-y-5 mt-10">
         {info.watchProvider && info.watchProvider.flatrate && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Available on Platforms:</h1>
+            <h1>Watch Now:</h1>
             {info.watchProvider.flatrate.map((w) => (
               <img
                 title={w.provider_name}
@@ -176,7 +175,7 @@ const MovieDetails = () => {
 
         {info.watchProvider && info.watchProvider.rent && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Available on Rent:</h1>
+            <h1>Rent:</h1>
             {info.watchProvider.rent.map((w) => (
               <img
                 title={w.provider_name}
@@ -190,7 +189,7 @@ const MovieDetails = () => {
 
         {info.watchProvider && info.watchProvider.buy && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Buy at:</h1>
+            <h1>Buy:</h1>
             {info.watchProvider.buy.map((w) => (
               <img
                 title={w.provider_name}
@@ -202,6 +201,19 @@ const MovieDetails = () => {
           </div>
         )}
       </div>
+
+      {/* Part 4 recommendations and similar*/}
+      <hr class="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+
+      <h1 className="text-3xl font-bold text-white mt-10 pl-5">
+        {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
+      </h1>
+      <TrendingCards
+        title="movies"
+        data={
+          info.recommendations.length > 0 ? info.recommendations : info.similar
+        }
+      />
     </div>
   ) : (
     <Loading />
@@ -209,42 +221,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-/*
-
- {info.watchProvider &&
-            info.watchProvider.rent &&
-            info.watchProvider.rent.map((w) => (
-              <img
-                className="w-[5vh] h-[5vh] object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                alt=""
-              />
-            ))}
-          {info.watchProvider &&
-            info.watchProvider.buy &&
-            info.watchProvider.buy.map((w) => (
-              <img
-                className="w-[5vh] h-[5vh] object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                alt=""
-              />
-            ))}
-
-
-              <a
-  href="#"
-  data-site="YouTube"
-  data-id="L4DrolmDxmw"
-  data-title="Play Trailer"
-  class="text-[rgb(232,230,227)] font-semibold box-border place-content-center items-center flex h-[24px] w-[104.882px] transition-all duration-[0.1s] ease-linear delay-0 will-change-[opacity] opacity-100 text-[16px] leading-[24px] rounded-[50%]"
->
-  Play Trailer
-</a>
-
-<style>
-
-</style>
-
-
-*/
