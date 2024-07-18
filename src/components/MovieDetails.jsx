@@ -1,10 +1,60 @@
 import React, { useEffect } from "react";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
 
+const CircularProgress = ({ percentage }) => {
+  const circleWidth = 60; // Increased from 39
+  const radius = 26; // Increased from 18
+  const dashArray = radius * Math.PI * 2;
+  const dashOffset = dashArray - (dashArray * percentage) / 100;
+
+  return (
+    <span className="hover:scale-105">
+      <svg
+        width={circleWidth}
+        height={circleWidth}
+        viewBox={`0 0 ${circleWidth} ${circleWidth}`}
+      >
+        <circle
+          cx={circleWidth / 2}
+          cy={circleWidth / 2}
+          strokeWidth="4" // Increased from 3
+          r={radius}
+          className="fill-[#081c22] stroke-[#081c22]"
+        />
+        <circle
+          cx={circleWidth / 2}
+          cy={circleWidth / 2}
+          strokeWidth="4" // Increased from 3
+          r={radius}
+          className="fill-none stroke-green-500"
+          style={{
+            strokeDasharray: dashArray,
+            strokeDashoffset: dashOffset,
+            strokeLinecap: "round",
+            transformOrigin: "50% 50%",
+            transform: "rotate(-90deg)",
+          }}
+        />
+        <text
+          x="50%"
+          y="50%"
+          dy="0.3em"
+          textAnchor="middle"
+          className="fill-white text-[16px] font-bold" // Increased from 10px
+        >
+          {`${percentage}%`}
+        </text>
+      </svg>
+    </span>
+  );
+};
+
 const MovieDetails = () => {
+  const { pathname } = useLocation();
+
   const { info } = useSelector((state) => state.movie);
   console.log(info);
   const dispatch = useDispatch();
@@ -19,7 +69,7 @@ const MovieDetails = () => {
   return info ? (
     <div
       style={{
-        background: `linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.5), rgba(0,0,0,.8)), url(https://image.tmdb.org/t/p/original/${
+        background: `linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.7), rgba(0,0,0,.8)), url(https://image.tmdb.org/t/p/original/${
           info.details.backdrop_path ||
           info.details.poster_path ||
           info.details.profile_path
@@ -56,7 +106,7 @@ const MovieDetails = () => {
       {/* {part 2 poster and details} */}
       <div className="w-full flex">
         <img
-          className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[40vh] object-cover"
+          className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] object-cover w-[40%]"
           src={`https://image.tmdb.org/t/p/original/${
             info.details.poster_path || info.details.backdrop_path
           }`}
@@ -67,6 +117,90 @@ const MovieDetails = () => {
             info.details.original_title
           }
         />
+
+        <div className="content ml-[3%] text-white">
+          <h1 className="text-5xl font-black text-white ">
+            {info.details.name ||
+              info.details.title ||
+              info.details.original_name ||
+              info.details.original_title}
+
+            <small className="text-2xl font-bold text-zinc-300">
+              ({info.details.release_date.split("-")[0]})
+            </small>
+          </h1>
+
+          <div className="mt-1 mb-5 flex text-white items-center gap-x-1">
+            <CircularProgress
+              percentage={(info.details.vote_average * 10).toFixed(0)}
+            />
+            <h1 className="ml-3">{info.details.release_date}</h1>
+            <span className="text-xl ml-3">•</span> {/* Bullet point */}
+            <h1>{info.details.genres.map((g) => g.name).join(", ")}</h1>
+            <span className="text-xl ml-3">•</span> {/* Bullet point */}
+            <h1>{info.details.runtime} min</h1>
+          </div>
+
+          <h1 className="text-2xl font-semibold italic text-zinc-200">
+            {info.details.tagline}
+          </h1>
+          <h1 className="mb-3 text-2xl mt-5">Overview</h1>
+          <p className="mb-7">{info.details.overview}</p>
+
+          <Link
+            to={`${pathname}/trailer`}
+            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
+          >
+            <i class="ri-play-fill text-lg"></i>
+            Play Trailer
+          </Link>
+        </div>
+      </div>
+
+      {/* {part 3 available platforms/watchproviders} */}
+
+      <div className="w-[80%] flex flex-col gap-y-5 mt-10">
+        {info.watchProvider && info.watchProvider.flatrate && (
+          <div className="flex gap-x-10 items-center text-white font-semibold">
+            <h1>Available on Platforms:</h1>
+            {info.watchProvider.flatrate.map((w) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
+                alt=""
+              />
+            ))}
+          </div>
+        )}
+
+        {info.watchProvider && info.watchProvider.rent && (
+          <div className="flex gap-x-10 items-center text-white font-semibold">
+            <h1>Available on Rent:</h1>
+            {info.watchProvider.rent.map((w) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
+                alt=""
+              />
+            ))}
+          </div>
+        )}
+
+        {info.watchProvider && info.watchProvider.buy && (
+          <div className="flex gap-x-10 items-center text-white font-semibold">
+            <h1>Buy at:</h1>
+            {info.watchProvider.buy.map((w) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
+                alt=""
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   ) : (
@@ -75,3 +209,42 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
+/*
+
+ {info.watchProvider &&
+            info.watchProvider.rent &&
+            info.watchProvider.rent.map((w) => (
+              <img
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
+                alt=""
+              />
+            ))}
+          {info.watchProvider &&
+            info.watchProvider.buy &&
+            info.watchProvider.buy.map((w) => (
+              <img
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
+                alt=""
+              />
+            ))}
+
+
+              <a
+  href="#"
+  data-site="YouTube"
+  data-id="L4DrolmDxmw"
+  data-title="Play Trailer"
+  class="text-[rgb(232,230,227)] font-semibold box-border place-content-center items-center flex h-[24px] w-[104.882px] transition-all duration-[0.1s] ease-linear delay-0 will-change-[opacity] opacity-100 text-[16px] leading-[24px] rounded-[50%]"
+>
+  Play Trailer
+</a>
+
+<style>
+
+</style>
+
+
+*/
