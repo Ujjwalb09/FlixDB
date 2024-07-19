@@ -11,6 +11,7 @@ import People from "./components/People";
 import MovieDetails from "./components/MovieDetails";
 import TvShowDetails from "./components/TvShowDetails";
 import PeopleDetails from "./components/PeopleDetails";
+import Trailer from "./components/templates/Trailer";
 
 const App = () => {
   // const locomotiveScroll = new LocomotiveScroll();
@@ -21,7 +22,12 @@ const App = () => {
         <Route path="/trending" element={<Trending />} />
         <Route path="/popular" element={<Popular />} />
 
-        <Route path="/movies/details/:id" element={<MovieDetails />} />
+        <Route path="/movies/details/:id" element={<MovieDetails />}>
+          <Route
+            path="/movies/details/:id/trailer"
+            element={<Trailer />}
+          ></Route>
+        </Route>
         <Route path="/movies" element={<Movies />} />
 
         <Route path="/tv_shows/details/:id" element={<TvShowDetails />} />

@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
@@ -77,7 +83,7 @@ const MovieDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="w-screen h-[150vh] px-[10%]"
+      className="relative w-screen h-[150vh] px-[10%]"
     >
       {/* {part 1 navigation} */}
       <nav className="h-[10vh] w-full text-zinc-200 flex gap-10 text-xl items-center">
@@ -85,9 +91,11 @@ const MovieDetails = () => {
           onClick={() => navigate(-1)}
           className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
         ></Link>{" "}
-        <a target="_blank" href={info.details.homepage}>
-          <i className="hover:text-[#E9C46A] ri-external-link-line"></i>
-        </a>
+        {info.details.homepage && (
+          <a target="_blank" href={info.details.homepage}>
+            <i className="hover:text-[#E9C46A] ri-external-link-line"></i>
+          </a>
+        )}
         <a
           target="_blank"
           href={`https://www.wikidata.org/wiki/${info.external_ids.wikidata_id}`}
@@ -214,6 +222,8 @@ const MovieDetails = () => {
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
       />
+
+      <Outlet />
     </div>
   ) : (
     <Loading />

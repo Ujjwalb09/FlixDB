@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import CircularProgress from "./CircularProgress";
 
 const TrendingCards = ({ data, title }) => {
-  console.log(data);
   return (
     <div className="w-[100%] flex overflow-y-hidden px-5 pt-5 mb-5">
       {data.map((d, i) => (
