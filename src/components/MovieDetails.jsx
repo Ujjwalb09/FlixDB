@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
+import Topnav from "./templates/Topnav";
 
 const CircularProgress = ({ percentage }) => {
   const circleWidth = 60; // Increased from 39
@@ -83,14 +84,33 @@ const MovieDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[150vh] px-[10%]"
+      className="relative w-screen h-[160vh] px-[10%]"
     >
-      {/* {part 1 navigation} */}
-      <nav className="h-[10vh] w-full text-zinc-200 flex gap-10 text-xl items-center">
-        <Link
-          onClick={() => navigate(-1)}
-          className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
-        ></Link>{" "}
+      {/* Search bar and logo */}
+      <div className="fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 py-5">
+        <h1 className="flex text-2xl font-semibold text-zinc-400">
+          <i
+            onClick={() => navigate(-1)}
+            className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
+          ></i>{" "}
+          <Link to="/">
+            <i className="text-[#E9C46A] ri-tv-fill mr-2"></i>
+            <span
+              onClick={() => navigate("/")}
+              className=" text-[#E7F0DC] mr-2"
+            >
+              Flix<span className="text-[#E9C46A]">DB</span>
+            </span>
+          </Link>
+        </h1>
+        <div className="flex items-center w-[80%]">
+          <div className="w-[90%]">
+            <Topnav />
+          </div>
+        </div>
+      </div>
+      {/* {part 1 navigation}
+      <nav className="h-[10vh] w-full text-zinc-200 flex gap-10 text-xl items-center mt-14">
         {info.details.homepage && (
           <a target="_blank" href={info.details.homepage}>
             <i className="hover:text-[#E9C46A] ri-external-link-line"></i>
@@ -109,10 +129,10 @@ const MovieDetails = () => {
         >
           IMDB
         </a>
-      </nav>
+      </nav> */}
 
       {/* {part 2 poster and details} */}
-      <div className="w-full flex">
+      <div className="w-full flex mt-32">
         <img
           className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] object-cover w-[40%]"
           src={`https://image.tmdb.org/t/p/original/${
