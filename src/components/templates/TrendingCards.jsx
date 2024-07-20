@@ -8,9 +8,7 @@ const TrendingCards = ({ data, title }) => {
       {data.map((d, i) => (
         <Link
           to={
-            !d.media_type
-              ? `/${title}/details/${d.id}`
-              : d.media_type == "movie"
+            d.media_type == "movie"
               ? `/movies/details/${d.id}`
               : `/tv_shows/details/${d.id}`
           }

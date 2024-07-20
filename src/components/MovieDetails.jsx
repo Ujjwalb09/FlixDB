@@ -237,7 +237,6 @@ const MovieDetails = () => {
         {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
       </h1>
       <TrendingCards
-        title="movies"
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }

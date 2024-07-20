@@ -59,6 +59,7 @@ const TvShowDetails = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
   const { info } = useSelector((state) => state.tv);
+  console.log(info);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -129,7 +130,7 @@ const TvShowDetails = () => {
       {/* {part 2 poster and details} */}
       <div className="w-full flex mt-32">
         <img
-          className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] object-cover w-[40%]"
+          className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] object-fit w-[20%]"
           src={`https://image.tmdb.org/t/p/original/${
             info.details.poster_path || info.details.backdrop_path
           }`}
@@ -237,10 +238,13 @@ const TvShowDetails = () => {
       <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
       <h1 className="text-3xl font-bold text-white mt-10 pl-5">
-        {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
+        {info.recommendations.length > 0
+          ? "Recommendations"
+          : info.similar.length > 0
+          ? "Similar"
+          : ""}
       </h1>
       <TrendingCards
-        title="movies"
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
