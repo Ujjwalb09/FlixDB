@@ -97,7 +97,7 @@ const TvShowDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[160vh] px-[10%]"
+      className="relative w-screen h-[205vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -234,7 +234,18 @@ const TvShowDetails = () => {
         )}
       </div>
 
-      {/* Part 4 recommendations and similar*/}
+      {/* Part 4 seasons*/}
+
+      {info.details.seasons.length > 0 && (
+        <div>
+          <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+
+          <h1 className="text-3xl font-bold text-white mt-10 pl-5">Seasons</h1>
+          <TrendingCards data={info.details.seasons} />
+        </div>
+      )}
+
+      {/* Part 5 recommendations and similar*/}
       <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
       <h1 className="text-3xl font-bold text-white mt-10 pl-5">

@@ -84,7 +84,7 @@ const MovieDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[160vh] px-[10%]"
+      className="relative w-screen h-[150vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div className="fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 py-5">
@@ -190,8 +190,9 @@ const MovieDetails = () => {
         {info.watchProvider && info.watchProvider.flatrate && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
             <h1>Watch Now:</h1>
-            {info.watchProvider.flatrate.map((w) => (
+            {info.watchProvider.flatrate.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md"
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -204,8 +205,9 @@ const MovieDetails = () => {
         {info.watchProvider && info.watchProvider.rent && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
             <h1>Rent:</h1>
-            {info.watchProvider.rent.map((w) => (
+            {info.watchProvider.rent.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md"
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -218,8 +220,9 @@ const MovieDetails = () => {
         {info.watchProvider && info.watchProvider.buy && (
           <div className="flex gap-x-10 items-center text-white font-semibold">
             <h1>Buy:</h1>
-            {info.watchProvider.buy.map((w) => (
+            {info.watchProvider.buy.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md"
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
