@@ -19,7 +19,7 @@ const Trailer = () => {
     <div className="bg-[rgba(0,0,0,.7)] absolute z-[100] top-0 left-0 w-screen h-screen flex items-center justify-center">
       <Link
         onClick={() => navigate(-1)}
-        className="hover:text-[#E9C46A] ri-close-line mr-5 absolute text-2xl text-white left-[5%] top-[5%]"
+        className="hover:text-[#E9C46A] ri-close-line mr-5 absolute text-2xl text-white left-[5%] top-[5%] hover:scale-110"
       >
         Close
       </Link>{" "}
