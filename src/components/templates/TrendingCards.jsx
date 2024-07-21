@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import CircularProgress from "./CircularProgress";
 import noImageFound from "/noImage.jpg";
 
-const TrendingCards = ({ data }) => {
+const TrendingCards = ({ data, showName = null }) => {
+  const encodeForUrl = (str) => {
+    return encodeURIComponent(str).replace(/%20/g, "-");
+  };
+
   return (
     <div className="w-full flex overflow-y-hidden px-5 pt-5 mb-5">
       {data.map(
@@ -11,9 +15,13 @@ const TrendingCards = ({ data }) => {
           d.name != "Specials" && (
             <Link
               to={
-                d.media_type == "movie"
-                  ? `/movies/details/${d.id}`
-                  : `/tv_shows/details/${d.id}`
+                !showName
+                  ? d.media_type == "movie"
+                    ? `/movies/details/${d.id}`
+                    : `/tv_shows/details/${d.id}`
+                  : `/tv_shows/${encodeForUrl(showName)}/${encodeForUrl(
+                      d.name
+                    )}/${d.id}`
               }
               className="min-w-[15%] w-[15%] mr-5 mb-5 hover:scale-105 flex flex-col"
               key={i}

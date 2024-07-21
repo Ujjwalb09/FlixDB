@@ -183,6 +183,11 @@ const TvShowDetails = () => {
             <i className="ri-play-fill text-lg"></i>
             Play Trailer
           </Link>
+
+          <h1 className="mt-8 text-[17px] font-semibold">
+            {info.details.created_by[0].name}
+          </h1>
+          <p className="text-[14px]">Creator</p>
         </div>
       </div>
 
@@ -235,13 +240,15 @@ const TvShowDetails = () => {
       </div>
 
       {/* Part 4 seasons*/}
-
       {info.details.seasons.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
           <h1 className="text-3xl font-bold text-white mt-10 pl-5">Seasons</h1>
-          <TrendingCards data={info.details.seasons} />
+          <TrendingCards
+            data={info.details.seasons}
+            showName={info.details.name}
+          />
         </div>
       )}
 
