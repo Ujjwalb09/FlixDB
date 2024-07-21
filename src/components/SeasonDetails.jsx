@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { asyncLoadTvShow, removeTvShow } from "../store/actions/tvShowActions";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { asyncLoadSeason, removeSeason } from "../store/actions/seasonAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
@@ -55,19 +60,19 @@ const CircularProgress = ({ percentage }) => {
   );
 };
 
-const TvShowDetails = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { pathname } = useLocation();
-  const { info } = useSelector((state) => state.tv);
-  console.log(info);
-  const { id } = useParams();
-  const navigate = useNavigate();
+const SeasonDetails = () => {
+  const { season, seriesId, showName } = useParams();
   const dispatch = useDispatch();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  useEffect(() => {
-    dispatch(asyncLoadTvShow(id));
-    return () => dispatch(removeTvShow());
-  }, [id]);
+  const seasonNumber = season.split("-").pop().replace(/\D/g, "") || "1";
+  console.log(seasonNumber);
+
+  const { info } = useSelector((state) => state.season);
+
+  console.log(info);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,6 +90,12 @@ const TvShowDetails = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(asyncLoadSeason(seriesId, seasonNumber));
+
+    return () => dispatch(removeSeason());
+  }, [seriesId, seasonNumber]);
 
   return info ? (
     <div
@@ -134,23 +145,14 @@ const TvShowDetails = () => {
           src={`https://image.tmdb.org/t/p/original/${
             info.details.poster_path || info.details.backdrop_path
           }`}
-          alt={
-            info.details.name ||
-            info.details.title ||
-            info.details.original_name ||
-            info.details.original_title
-          }
+          alt={""}
         />
 
         <div className="content ml-[3%] text-white">
           <h1 className="text-5xl font-black text-white ">
-            {info.details.name ||
-              info.details.title ||
-              info.details.original_name ||
-              info.details.original_title}
-
+            {showName.split("-").join(" ")}{" "}
             <small className="text-2xl font-bold text-zinc-300">
-              ({info.details.first_air_date.split("-")[0]})
+              {info.details.name}
             </small>
           </h1>
 
@@ -160,86 +162,26 @@ const TvShowDetails = () => {
             />
             <div className="text-[#E9C46A] flex gap-2">
               <span className="text-xl ml-3">•</span>
-              <h1>{info.details.first_air_date}</h1>
-              <span className="text-xl ml-3">•</span>
-              <h1>{info.details.genres.map((g) => g.name).join(", ")}</h1>
-              <span className="text-xl ml-3">•</span>
-              <h1>Seasons: {info.details.number_of_seasons}</h1>
-              <span className="text-xl ml-3">•</span>
-              <h1>Total Episodes: {info.details.number_of_episodes}</h1>
+              <h1>{info.details.air_date}</h1>
             </div>
           </div>
 
-          <h1 className="text-2xl font-semibold italic text-zinc-200">
-            {info.details.tagline}
-          </h1>
           <h1 className="mb-3 text-2xl mt-5">Overview</h1>
           <p className="mb-7">{info.details.overview}</p>
 
-          <Link
-            to={`${pathname}/trailer`}
-            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
-          >
-            <i className="ri-play-fill text-lg"></i>
-            Play Trailer
-          </Link>
-
-          <h1 className="mt-8 text-[17px] font-semibold">
-            {info.details.created_by[0].name}
-          </h1>
-          <p className="text-[14px]">Creator</p>
+          {info.videos && (
+            <Link
+              to={`${pathname}/trailer`}
+              className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
+            >
+              <i className="ri-play-fill text-lg"></i>
+              Play Trailer
+            </Link>
+          )}
         </div>
       </div>
 
-      {/*part 3 available platforms/watchproviders*/}
-      <div className="w-[80%] flex flex-col gap-y-5 mt-10">
-        {info.watchProvider && info.watchProvider.flatrate && (
-          <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Watch Now:</h1>
-            {info.watchProvider.flatrate.map((w) => (
-              <img
-                key={w.provider_id}
-                title={w.provider_name}
-                className="w-[5vh] h-[5vh] object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                alt=""
-              />
-            ))}
-          </div>
-        )}
-
-        {info.watchProvider && info.watchProvider.rent && (
-          <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Rent:</h1>
-            {info.watchProvider.rent.map((w) => (
-              <img
-                key={w.provider_id}
-                title={w.provider_name}
-                className="w-[5vh] h-[5vh] object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                alt=""
-              />
-            ))}
-          </div>
-        )}
-
-        {info.watchProvider && info.watchProvider.buy && (
-          <div className="flex gap-x-10 items-center text-white font-semibold">
-            <h1>Buy:</h1>
-            {info.watchProvider.buy.map((w) => (
-              <img
-                key={w.provider_id}
-                title={w.provider_name}
-                className="w-[5vh] h-[5vh] object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                alt=""
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Part 4 seasons*/}
+      {/* Part 4 episodes
       {info.details.seasons.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
@@ -248,13 +190,12 @@ const TvShowDetails = () => {
           <TrendingCards
             data={info.details.seasons}
             showName={info.details.name}
-            seriesId={info.details.id}
           />
         </div>
-      )}
+      )} */}
 
       {/* Part 5 recommendations and similar*/}
-      <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+      {/* <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
       <h1 className="text-3xl font-bold text-white mt-10 pl-5">
         {info.recommendations.length > 0
@@ -267,7 +208,7 @@ const TvShowDetails = () => {
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
-      />
+      /> */}
 
       <Outlet />
     </div>
@@ -276,4 +217,4 @@ const TvShowDetails = () => {
   );
 };
 
-export default TvShowDetails;
+export default SeasonDetails;

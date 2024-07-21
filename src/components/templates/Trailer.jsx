@@ -7,12 +7,15 @@ import NotFound from "../NotFound";
 const Trailer = () => {
   const { pathname } = useLocation();
 
-  const path = pathname.split("/")[1];
+  const path = pathname.split("/");
+
   const navigate = useNavigate();
 
   const { info } =
-    path === "movies"
+    path[1] === "movies"
       ? useSelector((state) => state.movie)
+      : path.includes("tv_shows") && pathname.includes("Season")
+      ? useSelector((state) => state.season)
       : useSelector((state) => state.tv);
 
   return (
