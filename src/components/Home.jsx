@@ -52,7 +52,7 @@ const Home = () => {
       <div className="w-[80%] h-screen overflow-x-hidden relative">
         <div
           className={`sticky top-0 z-10 ${
-            setscrolled ? "bg-black bg-opacity-70" : "bg-black"
+            scrolled ? "bg-black bg-opacity-70" : "bg-black"
           }`}
         >
           <Topnav />

@@ -67,8 +67,9 @@ const SeasonDetails = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const seasonNumber = season.split("-").pop().replace(/\D/g, "") || "1";
-  console.log(seasonNumber);
+  console.log(seriesId);
+
+  console.log(season);
 
   const { info } = useSelector((state) => state.season);
 
@@ -92,10 +93,10 @@ const SeasonDetails = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(asyncLoadSeason(seriesId, seasonNumber));
+    dispatch(asyncLoadSeason(seriesId, season));
 
     return () => dispatch(removeSeason());
-  }, [seriesId, seasonNumber]);
+  }, [seriesId, season]);
 
   return info ? (
     <div
@@ -152,7 +153,7 @@ const SeasonDetails = () => {
           <h1 className="text-5xl font-black text-white ">
             {showName.split("-").join(" ")}{" "}
             <small className="text-2xl font-bold text-zinc-300">
-              {info.details.name}
+              Season {season}
             </small>
           </h1>
 

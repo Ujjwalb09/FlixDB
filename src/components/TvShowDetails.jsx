@@ -184,7 +184,7 @@ const TvShowDetails = () => {
             Play Trailer
           </Link>
 
-          <div className="flex items-center gap-12">
+          <div className="flex items-center gap-24">
             <div>
               <h1 className="mt-8 text-[17px] font-semibold">
                 {info.details.created_by[0].name}
@@ -197,21 +197,21 @@ const TvShowDetails = () => {
                 target="_blank"
                 href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
               >
-                <i class="ri-facebook-circle-fill text-[30px]"></i>
+                <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A]"></i>
               </a>
 
               <a
                 target="_blank"
                 href={`https://x.com/${info.external_ids.twitter_id}`}
               >
-                <i className="ri-twitter-fill text-[30px]"></i>
+                <i className="ri-twitter-fill text-[30px] text-[#E9C46A]"></i>
               </a>
 
               <a
                 target="_blank"
                 href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
               >
-                <i class="ri-instagram-fill text-[30px]"></i>
+                <i className="ri-instagram-fill text-[30px] text-[#E9C46A]"></i>
               </a>
             </div>
           </div>

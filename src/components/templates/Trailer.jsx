@@ -8,13 +8,14 @@ const Trailer = () => {
   const { pathname } = useLocation();
 
   const path = pathname.split("/");
+  console.log(path);
 
   const navigate = useNavigate();
 
   const { info } =
     path[1] === "movies"
       ? useSelector((state) => state.movie)
-      : path.includes("tv_shows") && pathname.includes("Season")
+      : path.includes("tv_shows") && pathname.includes("season")
       ? useSelector((state) => state.season)
       : useSelector((state) => state.tv);
 
