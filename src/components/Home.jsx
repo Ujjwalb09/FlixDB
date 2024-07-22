@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import Sidenav from "./templates/Sidenav";
 import Topnav from "./templates/Topnav";
 import Header from "./templates/Header";
@@ -10,10 +10,12 @@ import Loading from "./Loading";
 const Home = () => {
   document.title = "FlixDB | Homepage";
 
-  const [scrolled, setscrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [created, setCreated] = useState(false);
   const [headerData, setHeaderData] = useState(null);
   const [trendingData, setTrendingData] = useState(null);
   const [category, setCategory] = useState("all");
+  const scrollContainerRef = useRef(null);
 
   const getHeaderData = async () => {
     const { data } = await axios.get("/trending/all/day");
@@ -27,38 +29,51 @@ const Home = () => {
     setTrendingData(data.results);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     !headerData && getHeaderData();
     getTrendingData();
   }, [category]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scroll = window.scrollY;
-
-      if (scroll > 30) {
-        setscrolled(true);
-      } else setscrolled(false);
+      if (scrollContainerRef.current) {
+        const scroll = scrollContainerRef.current.scrollTop;
+        if (scroll > 10) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll);
+    }
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [created]);
 
   return headerData && trendingData ? (
     <div className="flex overflow-x-hidden">
       <Sidenav />
-      <div className="w-[80%] h-screen overflow-x-hidden relative">
+      <div
+        ref={scrollContainerRef}
+        className="w-[80%] h-screen overflow-y-auto overflow-x-hidden relative"
+      >
+        {!created && setCreated(true)}
         <div
           className={`sticky top-0 z-10 ${
-            scrolled ? "bg-black bg-opacity-70" : "bg-black"
+            scrolled ? "bg-black bg-opacity-60" : "bg-black"
           }`}
         >
           <Topnav />
         </div>
         <div className="content-container">
-          {/* Add padding-top here */}
           <Header data={headerData} />
           <div className="flex justify-between p-5">
             <h1 className="text-3xl font-semibold text-zinc-400">Trending</h1>
