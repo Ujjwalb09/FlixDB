@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
 import {
   Link,
@@ -62,6 +62,7 @@ const CircularProgress = ({ percentage }) => {
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { info } = useSelector((state) => state.movie);
   console.log(info);
@@ -73,6 +74,19 @@ const MovieDetails = () => {
 
     return () => dispatch(removeMovie());
   }, [id]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scroll = window.scrollY;
+
+      if (scroll > 30) setIsScrolled(true);
+      else setIsScrolled(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return info ? (
     <div
       style={{
@@ -87,7 +101,11 @@ const MovieDetails = () => {
       className="relative w-screen h-[150vh] px-[10%]"
     >
       {/* Search bar and logo */}
-      <div className="fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 py-5">
+      <div
+        className={`fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 py-5 transition-all duration-300 ${
+          isScrolled ? "bg-black bg-opacity-80" : "bg-black bg-opacity-20"
+        }`}
+      >
         <h1 className="flex text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate(-1)}
@@ -158,15 +176,19 @@ const MovieDetails = () => {
             </small>
           </h1>
 
-          <div className="mt-1 mb-5 flex text-white items-center gap-x-1">
+          <div className="mt-1 mb-5 flex items-center gap-x-1 text-white">
             <CircularProgress
               percentage={(info.details.vote_average * 10).toFixed(0)}
             />
-            <h1 className="ml-3">{info.details.release_date}</h1>
-            <span className="text-xl ml-3">•</span> {/* Bullet point */}
-            <h1>{info.details.genres.map((g) => g.name).join(", ")}</h1>
-            <span className="text-xl ml-3">•</span> {/* Bullet point */}
-            <h1>{info.details.runtime} min</h1>
+
+            <div className="text-[#E9C46A] flex gap-2">
+              <span className="text-xl ml-3">•</span>
+              <h1>{info.details.release_date}</h1>
+              <span className="text-xl ml-3">•</span> {/* Bullet point */}
+              <h1>{info.details.genres.map((g) => g.name).join(", ")}</h1>
+              <span className="text-xl ml-3">•</span> {/* Bullet point */}
+              <h1>{info.details.runtime} min</h1>
+            </div>
           </div>
 
           <h1 className="text-2xl font-semibold italic text-zinc-200">
@@ -177,11 +199,45 @@ const MovieDetails = () => {
 
           <Link
             to={`${pathname}/trailer`}
-            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
+            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] hover:scale-105 duration-200 inline-flex items-center justify-center"
           >
             <i class="ri-play-fill text-lg"></i>
             Play Trailer
           </Link>
+
+          <div className="flex gap-8 mt-8">
+            <a
+              target="_blank"
+              href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
+              className="hover:scale-125"
+            >
+              <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] hover:scale-125 duration-200"></i>
+            </a>
+
+            <a
+              target="_blank"
+              href={`https://x.com/${info.external_ids.twitter_id}`}
+              className="hover:scale-125"
+            >
+              <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
+            </a>
+
+            <a
+              target="_blank"
+              href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
+              className="hover:scale-125"
+            >
+              <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
+            </a>
+
+            <a
+              target="_blank"
+              href={`${info.details.homepage}`}
+              className="hover:scale-125"
+            >
+              <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
+            </a>
+          </div>
         </div>
       </div>
 
