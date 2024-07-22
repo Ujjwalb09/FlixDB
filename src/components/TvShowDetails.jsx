@@ -102,7 +102,7 @@ const TvShowDetails = () => {
       {/* Search bar and logo */}
       <div
         className={`fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 py-5 transition-all duration-300 ${
-          isScrolled ? "bg-black bg-opacity-75" : "bg-black bg-opacity-10"
+          isScrolled ? "bg-black bg-opacity-80" : "bg-black bg-opacity-20"
         }`}
       >
         <h1 className="flex text-2xl font-semibold text-zinc-400">
@@ -184,10 +184,37 @@ const TvShowDetails = () => {
             Play Trailer
           </Link>
 
-          <h1 className="mt-8 text-[17px] font-semibold">
-            {info.details.created_by[0].name}
-          </h1>
-          <p className="text-[14px]">Creator</p>
+          <div className="flex items-center gap-12">
+            <div>
+              <h1 className="mt-8 text-[17px] font-semibold">
+                {info.details.created_by[0].name}
+              </h1>
+              <p className="text-[14px]">Creator</p>
+            </div>
+
+            <div className="flex gap-5 mt-5">
+              <a
+                target="_blank"
+                href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
+              >
+                <i class="ri-facebook-circle-fill text-[30px]"></i>
+              </a>
+
+              <a
+                target="_blank"
+                href={`https://x.com/${info.external_ids.twitter_id}`}
+              >
+                <i className="ri-twitter-fill text-[30px]"></i>
+              </a>
+
+              <a
+                target="_blank"
+                href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
+              >
+                <i class="ri-instagram-fill text-[30px]"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
