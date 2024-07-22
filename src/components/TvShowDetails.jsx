@@ -178,40 +178,53 @@ const TvShowDetails = () => {
 
           <Link
             to={`${pathname}/trailer`}
-            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
+            className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] hover:scale-105 duration-200 inline-flex items-center justify-center"
           >
             <i className="ri-play-fill text-lg"></i>
             Play Trailer
           </Link>
 
           <div className="flex items-center gap-24">
-            <div>
-              <h1 className="mt-8 text-[17px] font-semibold">
-                {info.details.created_by[0].name}
-              </h1>
-              <p className="text-[14px]">Creator</p>
-            </div>
+            {info.details.created_by.length > 0 && (
+              <div>
+                <h1 className="mt-8 text-[17px] font-semibold">
+                  {info.details.created_by[0].name}
+                </h1>
+                <p className="text-[14px]">Creator</p>
+              </div>
+            )}
 
-            <div className="flex gap-5 mt-5">
+            <div className="flex gap-8 mt-8">
               <a
                 target="_blank"
                 href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
+                className="hover:scale-125"
               >
-                <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A]"></i>
+                <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] duration-200"></i>
               </a>
 
               <a
                 target="_blank"
                 href={`https://x.com/${info.external_ids.twitter_id}`}
+                className="hover:scale-125"
               >
-                <i className="ri-twitter-fill text-[30px] text-[#E9C46A]"></i>
+                <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
               </a>
 
               <a
                 target="_blank"
                 href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
+                className="hover:scale-125"
               >
-                <i className="ri-instagram-fill text-[30px] text-[#E9C46A]"></i>
+                <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
+              </a>
+
+              <a
+                target="_blank"
+                href={`${info.details.homepage}`}
+                className="hover:scale-125"
+              >
+                <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
               </a>
             </div>
           </div>

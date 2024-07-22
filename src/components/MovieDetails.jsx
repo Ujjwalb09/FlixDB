@@ -66,6 +66,11 @@ const MovieDetails = () => {
 
   const { info } = useSelector((state) => state.movie);
   console.log(info);
+
+  useEffect(() => {
+    info ? (document.title = `FlixDB | ${info.details.title}`) : "FlixDB";
+  }, [info]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -98,7 +103,7 @@ const MovieDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[150vh] px-[10%]"
+      className="relative w-screen h-[165vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -127,27 +132,6 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      {/* {part 1 navigation}
-      <nav className="h-[10vh] w-full text-zinc-200 flex gap-10 text-xl items-center mt-14">
-        {info.details.homepage && (
-          <a target="_blank" href={info.details.homepage}>
-            <i className="hover:text-[#E9C46A] ri-external-link-line"></i>
-          </a>
-        )}
-        <a
-          target="_blank"
-          href={`https://www.wikidata.org/wiki/${info.external_ids.wikidata_id}`}
-        >
-          <i className="hover:text-[#E9C46A] ri-earth-fill"></i>
-        </a>
-        <a
-          className="hover:text-[#E9C46A]"
-          target="_blank"
-          href={`https://www.imdb.com/title/${info.external_ids.imdb_id}/`}
-        >
-          IMDB
-        </a>
-      </nav> */}
 
       {/* {part 2 poster and details} */}
       <div className="w-full flex mt-32">
@@ -177,9 +161,11 @@ const MovieDetails = () => {
           </h1>
 
           <div className="mt-1 mb-5 flex items-center gap-x-1 text-white">
-            <CircularProgress
-              percentage={(info.details.vote_average * 10).toFixed(0)}
-            />
+            {info.details.vote_average != 0 && (
+              <CircularProgress
+                percentage={(info.details.vote_average * 10).toFixed(0)}
+              />
+            )}
 
             <div className="text-[#E9C46A] flex gap-2">
               <span className="text-xl ml-3">•</span>
@@ -206,37 +192,45 @@ const MovieDetails = () => {
           </Link>
 
           <div className="flex gap-8 mt-8">
-            <a
-              target="_blank"
-              href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
-              className="hover:scale-125"
-            >
-              <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] hover:scale-125 duration-200"></i>
-            </a>
+            {info.external_ids.facebook_id && (
+              <a
+                target="_blank"
+                href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
+                className="hover:scale-125"
+              >
+                <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] hover:scale-125 duration-200"></i>
+              </a>
+            )}
 
-            <a
-              target="_blank"
-              href={`https://x.com/${info.external_ids.twitter_id}`}
-              className="hover:scale-125"
-            >
-              <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
-            </a>
+            {info.external_ids.twitter_id && (
+              <a
+                target="_blank"
+                href={`https://x.com/${info.external_ids.twitter_id}`}
+                className="hover:scale-125"
+              >
+                <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
+              </a>
+            )}
 
-            <a
-              target="_blank"
-              href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
-              className="hover:scale-125"
-            >
-              <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
-            </a>
+            {info.external_ids.instagram_id && (
+              <a
+                target="_blank"
+                href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
+                className="hover:scale-125"
+              >
+                <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
+              </a>
+            )}
 
-            <a
-              target="_blank"
-              href={`${info.details.homepage}`}
-              className="hover:scale-125"
-            >
-              <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
-            </a>
+            {info.details.homepage && (
+              <a
+                target="_blank"
+                href={`${info.details.homepage}`}
+                className="hover:scale-125"
+              >
+                <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -299,6 +293,7 @@ const MovieDetails = () => {
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
+        title="movies"
       />
 
       <Outlet />

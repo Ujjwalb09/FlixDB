@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CircularProgress from "./CircularProgress";
 import noImageFound from "/noImage.jpg";
 
-const TrendingCards = ({ data, showName = null, seriesId }) => {
+const TrendingCards = ({ data, showName = null, seriesId, title }) => {
   const encodeForUrl = (str) => {
     return encodeURIComponent(str).replace(/%20/g, "-");
   };
@@ -19,7 +19,9 @@ const TrendingCards = ({ data, showName = null, seriesId }) => {
         }
 
         const path = !showName
-          ? d.media_type === "movie"
+          ? !d.media_type
+            ? `/${title}/details/${d.id}`
+            : d.media_type === "movie"
             ? `/movies/details/${d.id}`
             : `/tv_shows/details/${d.id}`
           : `/tv_shows/${seriesId}/${encodeForUrl(
