@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
 import {
   Link,
@@ -62,10 +62,12 @@ const CircularProgress = ({ percentage }) => {
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
+  const [created, setCreated] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const { info } = useSelector((state) => state.movie);
   console.log(info);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     info ? (document.title = `FlixDB | ${info.details.title}`) : "FlixDB";
@@ -83,15 +85,21 @@ const MovieDetails = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
-
-      if (scroll > 30) setIsScrolled(true);
-      else setIsScrolled(false);
+      console.log(scroll);
+      if (scroll > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
   return info ? (
     <div
       style={{
@@ -103,7 +111,7 @@ const MovieDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[165vh] px-[10%]"
+      className="relative w-screen h-[165vh] px-[10%] overflow-y-auto"
     >
       {/* Search bar and logo */}
       <div

@@ -102,6 +102,11 @@ select {
     color: #E9C46A;
     
     }
+
+    html {
+        overflow-x: hidden;
+        
+    }
 /* 
     select {
         color: #333333;
