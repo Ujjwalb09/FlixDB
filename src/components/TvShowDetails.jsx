@@ -70,6 +70,10 @@ const TvShowDetails = () => {
   }, [id]);
 
   useEffect(() => {
+    info ? (document.title = `FlixDB | ${info.details.name}`) : "FlixDB";
+  }, [info]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       if (scrollPosition > 50) {

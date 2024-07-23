@@ -15,7 +15,7 @@ const TrendingCards = ({ data, showName = null, seriesId, title }) => {
     <div className="w-full flex overflow-y-hidden px-5 pt-5 mb-5">
       {data.map((d, i) => {
         if (d.name === "Specials") {
-          return null; // Skip specials
+          return null;
         }
 
         const path = !showName

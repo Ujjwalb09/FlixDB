@@ -67,10 +67,6 @@ const SeasonDetails = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(seriesId);
-
-  console.log(season);
-
   const { info } = useSelector((state) => state.season);
 
   console.log(info);

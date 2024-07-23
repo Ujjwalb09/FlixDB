@@ -1,6 +1,7 @@
 import axios from "../../utils/axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CircularProgress from "./CircularProgress";
 
 const Topnav = () => {
   const [query, setquery] = useState("");
@@ -14,6 +15,8 @@ const Topnav = () => {
       console.log(error);
     }
   };
+
+  console.log(searches);
 
   useEffect(() => {
     getSearches();
@@ -38,7 +41,7 @@ const Topnav = () => {
       )}
 
       {query.length > 0 && searches.length > 0 && (
-        <div className="search-result w-[79%] absolute max-h-[50vh] bg-zinc-200 top-[100%] overflow-auto rounded left-[6%] z-50 shadow-lg">
+        <div className="search-result w-[79%] absolute max-h-[50vh] bg-zinc-200 top-[100%] overflow-auto rounded left-[6%] z-50 shadow-lg overflow-x-hidden">
           {searches.map((s, i) => (
             <Link
               to={
