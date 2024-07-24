@@ -120,7 +120,7 @@ const SeasonDetails = () => {
             className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
           ></i>{" "}
           <Link to="/">
-            <i className="text-[#E9C46A] ri-tv-fill mr-2"></i>
+            <i className="text-[#E9C46A] ri-movie-fill mr-2"></i>
             <span
               onClick={() => navigate("/")}
               className=" text-[#E7F0DC] mr-2"

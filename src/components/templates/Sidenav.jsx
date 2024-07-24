@@ -8,7 +8,8 @@ const Sidenav = () => {
     <div className="w-[20%] h-full border-r-2 border-zinc-400 p-10">
       <a href="/">
         <h1 className="text-2xl text-white font-bold">
-          <i className="text-[#E9C46A] ri-tv-fill mr-3"></i>
+          {/* <i className="text-[#E9C46A] ri-tv-fill mr-3"></i> */}
+          <i className="text-[#E9C46A] ri-movie-fill mr-3"></i>
 
           <span className="text-2xl text-[#E7F0DC]">
             Flix<span className="text-[#E9C46A]">DB</span>

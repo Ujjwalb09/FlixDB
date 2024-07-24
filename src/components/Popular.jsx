@@ -50,7 +50,7 @@ const Popular = () => {
             className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
           ></i>{" "}
           <Link to="/">
-            <i className="text-[#E9C46A] ri-tv-fill mr-2"></i>
+            <i className="text-[#E9C46A] ri-movie-fill mr-2"></i>
             <span className=" text-[#E7F0DC] mr-2">
               Flix<span className="text-[#E9C46A]">DB</span>
             </span>
@@ -78,7 +78,10 @@ const Popular = () => {
           hasMore={hasMore}
           loader={<h1>Loading...</h1>}
         >
-          <Cards data={popularData} title={category} />
+          <Cards
+            data={popularData}
+            title={category == "movie" ? "movies" : "tv_shows"}
+          />
         </InfiniteScroll>
       </div>
     </div>
