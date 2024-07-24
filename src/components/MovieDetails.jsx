@@ -195,7 +195,7 @@ const MovieDetails = () => {
             to={`${pathname}/trailer`}
             className="px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] hover:scale-105 duration-200 inline-flex items-center justify-center"
           >
-            <i class="ri-play-fill text-lg"></i>
+            <i className="ri-play-fill text-lg"></i>
             Play Trailer
           </Link>
 
@@ -292,7 +292,7 @@ const MovieDetails = () => {
       </div>
 
       {/* Part 4 recommendations and similar*/}
-      <hr class="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+      <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
       <h1 className="text-3xl font-bold text-white mt-10 pl-5">
         {info.recommendations.length > 0 ? "Recommendations" : "Similar"}

@@ -35,7 +35,7 @@ const Header = ({ data }) => {
         {data.release_date || data.first_air_date}
         <i className="text-[#E9C46A] ml-3 ri-album-fill"></i>{" "}
         {data.media_type.toUpperCase()}
-        <i class="ri-star-fill text-[#E9C46A] ml-3"></i>{" "}
+        <i className="ri-star-fill text-[#E9C46A] ml-3"></i>{" "}
         {Math.floor(data.popularity)}
       </p>
       <Link
@@ -44,7 +44,7 @@ const Header = ({ data }) => {
         }/trailer`}
         className="mt-5 px-3 py-2 text-sm rounded-full font-semibold bg-[#E9C46A] text-white tracking-tight hover:bg-[#AF9350] duration-200 inline-flex items-center justify-center"
       >
-        <i class="ri-play-fill text-lg"></i>
+        <i className="ri-play-fill text-lg"></i>
         Play Trailer
       </Link>
     </div>
