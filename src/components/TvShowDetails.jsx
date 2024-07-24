@@ -101,7 +101,7 @@ const TvShowDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[205vh] px-[10%]"
+      className="relative w-screen h-[215vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div

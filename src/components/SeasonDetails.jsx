@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
 import Topnav from "./templates/Topnav";
+import NoImageFound from "../../public/noImage.jpg";
 
 const CircularProgress = ({ percentage }) => {
   const circleWidth = 60;
@@ -139,9 +140,13 @@ const SeasonDetails = () => {
       <div className="w-full flex mt-32">
         <img
           className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] object-fit w-[20%]"
-          src={`https://image.tmdb.org/t/p/original/${
+          src={
             info.details.poster_path || info.details.backdrop_path
-          }`}
+              ? `https://image.tmdb.org/t/p/original/${
+                  info.details.poster_path || info.details.backdrop_path
+                }`
+              : NoImageFound
+          }
           alt={""}
         />
 

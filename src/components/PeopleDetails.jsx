@@ -13,7 +13,8 @@ const PeopleDetails = () => {
   const dispatch = useDispatch();
 
   const { info } = useSelector((state) => state.people);
-  console.log(info.movieCredits.cast);
+
+  console.log(info);
 
   useEffect(() => {
     dispatch(asyncLoadPeople(id));
@@ -46,7 +47,7 @@ const PeopleDetails = () => {
         backgroundPosition: "top 55% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[170vh] px-[10%]"
+      className="relative w-screen h-[250vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -171,6 +172,17 @@ const PeopleDetails = () => {
       <TrendingCards
         data={info.movieCredits.cast.length > 0 && info.movieCredits.cast}
         title="movies"
+      />
+
+      {/* Part 6 tv shows*/}
+      <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+
+      <h1 className="text-3xl font-bold text-white mt-10 pl-5 mb-3">
+        {info.tvCredits.cast.length > 0 && `Appeared On`}
+      </h1>
+      <TrendingCards
+        data={info.tvCredits.cast.length > 0 && info.tvCredits.cast}
+        title="tv_shows"
       />
     </div>
   ) : (
