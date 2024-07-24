@@ -1,11 +1,13 @@
 import axios from "../../utils/axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import CircularProgress from "./CircularProgress";
 
 const Topnav = () => {
   const [query, setquery] = useState("");
   const [searches, setSearches] = useState([]);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const searchContainerRef = useRef(null);
 
   const getSearches = async () => {
     try {
@@ -16,17 +18,38 @@ const Topnav = () => {
     }
   };
 
-  console.log(searches);
-
   useEffect(() => {
     getSearches();
   }, [query]);
 
+  const handleClickOutside = (event) => {
+    console.log(event.target);
+    if (
+      searchContainerRef.current &&
+      !searchContainerRef.current.contains(event.target)
+    ) {
+      setIsSearchVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="max-w-screen-md h-[8vh] flex justify-start items-center relative mx-auto z-50">
+    <div
+      ref={searchContainerRef}
+      className="max-w-screen-md h-[8vh] flex justify-start items-center relative mx-auto z-50"
+    >
       <i className="text-[#E9C46A] text-3xl ri-search-line"></i>
       <input
-        onChange={(e) => setquery(e.target.value)}
+        onChange={(e) => {
+          setquery(e.target.value);
+          setIsSearchVisible(true);
+        }}
         value={query}
         className="w-[68%] text-zinc-200 mx-10 p-5 text-xl outline-none border-none bg-transparent"
         type="text"
@@ -35,12 +58,15 @@ const Topnav = () => {
 
       {query.length > 0 && (
         <i
-          onClick={() => setquery("")}
+          onClick={() => {
+            setquery("");
+            setIsSearchVisible(false);
+          }}
           className="text-zinc-400 text-3xl ri-close-line cursor-pointer"
         ></i>
       )}
 
-      {query.length > 0 && searches.length > 0 && (
+      {isSearchVisible && query.length > 0 && searches.length > 0 && (
         <div className="search-result w-[79%] absolute max-h-[50vh] bg-zinc-200 top-[100%] overflow-auto rounded left-[6%] z-50 shadow-lg overflow-x-hidden">
           {searches.map((s, i) => (
             <Link
