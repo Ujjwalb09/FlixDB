@@ -47,7 +47,7 @@ const PeopleDetails = () => {
         backgroundPosition: "top 55% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[250vh] px-[10%]"
+      className="relative w-screen h-[230vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -143,23 +143,67 @@ const PeopleDetails = () => {
             </div>
           </div>
 
-          <div className="text-[#E9C46A] flex gap-1 mt-3">
-            <div className="flex gap-2 items-center">
-              <i className="text-[18px] ri-star-fill text-[#E9C46A]"></i>{" "}
-              <p>{Math.floor(info.details.popularity)}</p>
+          <h1 className="mb-3 text-[20px] mt-3 font-bold">Biography</h1>
+          <p className="text-[15px]">{info.details.biography}</p>
+
+          {/* details */}
+          <div className="text-zinc-300 mt-6">
+            <div className="DIV-1 flex gap-10">
+              <div>
+                <h1 className="font-semibold text-[#E9C46A] ">Known For</h1>
+                <p className="">{info.details.known_for_department}</p>
+              </div>
+
+              <div>
+                <h1 className="font-semibold text-[#E9C46A]">Popularity</h1>
+                <div className="flex gap-2 items-center">
+                  <i className="text-[18px] ri-star-fill text-[#E9C46A]"></i>{" "}
+                  <p>{Math.floor(info.details.popularity)}</p>
+                </div>
+              </div>
+
+              <div>
+                <h1 className="font-semibold text-[#E9C46A]">Birthday</h1>
+                <p>
+                  {new Date(info.details.birthday).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
             </div>
 
-            <span className="text-xl ml-4">•</span>
-            <h1>
-              {info.details.birthday}
-              {info.details.deathday && ` - ${info.details.deathday}`}
-            </h1>
-            <span className="text-xl ml-4">•</span>
-            <h1>{info.details.place_of_birth}</h1>
-          </div>
+            <div className="DIV-2 flex gap-10 mt-8">
+              <div>
+                <h1 className="font-semibold text-[#E9C46A]">Gender</h1>
+                <p className="">
+                  {info.details.gender == 2 ? "Male" : "Female"}
+                </p>
+              </div>
 
-          <h1 className="mb-3 text-3xl mt-5">Biography</h1>
-          <p className="mb-1 text-[19px]">{info.details.biography}</p>
+              <div>
+                <h1 className="font-semibold text-[#E9C46A]">Place of Birth</h1>
+                <p className="">{info.details.place_of_birth}</p>
+              </div>
+
+              <div>
+                <h1 className="font-semibold text-[#E9C46A]">Deathday</h1>
+                <p className="">
+                  {info.details.deathday
+                    ? new Date(info.details.deathday).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )
+                    : "-"}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -167,7 +211,7 @@ const PeopleDetails = () => {
       <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
       <h1 className="text-3xl font-bold text-white mt-10 pl-5 mb-3">
-        {info.movieCredits.cast.length > 0 && `Movies by ${info.details.name}`}
+        {info.movieCredits.cast.length > 0 && `Known for`}
       </h1>
       <TrendingCards
         data={info.movieCredits.cast.length > 0 && info.movieCredits.cast}

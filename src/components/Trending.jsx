@@ -15,6 +15,7 @@ const Trending = () => {
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   document.title = "FlixDB | Trending ";
 
@@ -49,9 +50,31 @@ const Trending = () => {
     refreshHandler();
   }, [category, duration]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scroll = window.scrollY;
+      console.log(scroll);
+      if (scroll > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return trendingData.length > 0 ? (
     <div className="w-screen h-screen">
-      <div className="fixed top-0 left-0 w-full bg-black z-10 px-[5%] flex items-center justify-between h-16">
+      <div
+        className={`fixed top-0 left-0 w-full z-10 px-[5%] flex items-center justify-between h-16 transition-all duration-300 ${
+          isScrolled ? "bg-black bg-opacity-75" : "bg-black"
+        }`}
+      >
         <h1 className="flex text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate("/")}
