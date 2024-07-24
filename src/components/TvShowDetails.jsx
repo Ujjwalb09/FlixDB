@@ -59,7 +59,7 @@ const TvShowDetails = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
   const { info } = useSelector((state) => state.tv);
-  console.log(info);
+  // console.log(info);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();

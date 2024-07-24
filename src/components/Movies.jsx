@@ -45,7 +45,7 @@ const Movies = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
-      console.log(scroll);
+
       if (scroll > 10) {
         setIsScrolled(true);
       } else {

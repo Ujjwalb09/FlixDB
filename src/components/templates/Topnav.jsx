@@ -23,7 +23,7 @@ const Topnav = () => {
   }, [query]);
 
   const handleClickOutside = (event) => {
-    console.log(event.target);
+  
     if (
       searchContainerRef.current &&
       !searchContainerRef.current.contains(event.target)

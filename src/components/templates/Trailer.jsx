@@ -8,7 +8,7 @@ const Trailer = () => {
   const { pathname } = useLocation();
 
   const path = pathname.split("/");
-  console.log(path);
+  // console.log(path);
 
   const navigate = useNavigate();
 

@@ -70,7 +70,7 @@ const SeasonDetails = () => {
 
   const { info } = useSelector((state) => state.season);
 
-  console.log(info);
+  // console.log(info);
 
   useEffect(() => {
     const handleScroll = () => {

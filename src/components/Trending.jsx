@@ -31,8 +31,6 @@ const Trending = () => {
       setHasMore(false);
     }
 
-    console.log(data);
-
     // setTrendingData(data.results);
   };
 
@@ -53,7 +51,7 @@ const Trending = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
-      console.log(scroll);
+
       if (scroll > 10) {
         setIsScrolled(true);
       } else {

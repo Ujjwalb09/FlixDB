@@ -66,7 +66,7 @@ const MovieDetails = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const { info } = useSelector((state) => state.movie);
-  console.log(info);
+
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const MovieDetails = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scroll = window.scrollY;
-      console.log(scroll);
+
       if (scroll > 10) {
         setIsScrolled(true);
       } else {

@@ -14,8 +14,6 @@ const PeopleDetails = () => {
 
   const { info } = useSelector((state) => state.people);
 
-  console.log(info);
-
   useEffect(() => {
     dispatch(asyncLoadPeople(id));
   }, [id]);
