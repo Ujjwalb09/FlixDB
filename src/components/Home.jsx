@@ -83,7 +83,7 @@ const Home = () => {
               func={(e) => setCategory(e.target.value)}
             />
           </div>
-          <TrendingCards data={trendingData} />
+          <TrendingCards data={trendingData} animated={true} />
         </div>
       </div>
     </div>

@@ -12,7 +12,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
+    "framer-motion": "^11.3.17",
+    "install": "^0.13.0",
     "locomotive-scroll": "^5.0.0-beta.13",
+    "npm": "^10.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-infinite-scroll-component": "^6.1.0",

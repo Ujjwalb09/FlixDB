@@ -293,6 +293,7 @@ const TvShowDetails = () => {
             data={info.details.seasons}
             showName={info.details.name}
             seriesId={info.details.id}
+            animated={info.details.seasons.length > 6 ? true : false}
           />
         </div>
       )}
@@ -311,6 +312,7 @@ const TvShowDetails = () => {
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
+        animated={true}
       />
 
       <Outlet />

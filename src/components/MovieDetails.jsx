@@ -302,6 +302,7 @@ const MovieDetails = () => {
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
         title="movies"
+        animated={true}
       />
 
       <Outlet />

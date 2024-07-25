@@ -105,14 +105,5 @@ select {
 
     html {
         overflow-x: hidden;
-        
+        scroll-behavior: smooth;
     }
-/* 
-    select {
-        color: #333333;
-        font-family: cursive;
-        inline-size: 100%;
-        font-size: 11px;
-      }
-       */
-
