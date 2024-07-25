@@ -32,7 +32,14 @@ const Header = ({ data }) => {
       </p>
       <p className="text-white">
         <i className="text-[#E9C46A] ri-megaphone-fill"></i>{" "}
-        {data.release_date || data.first_air_date}
+        {new Date(data.release_date || data.first_air_date).toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }
+        )}
         <i className="text-[#E9C46A] ml-3 ri-album-fill"></i>{" "}
         {data.media_type.toUpperCase()}
         <i className="ri-star-fill text-[#E9C46A] ml-3"></i>{" "}
