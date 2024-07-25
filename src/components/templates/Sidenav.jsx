@@ -24,31 +24,31 @@ const Sidenav = () => {
 
         <Link
           to="/trending"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5 hover:scale-105"
         >
           <i className="ri-fire-fill"></i> Trending
         </Link>
         <Link
           to="/popular"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
         >
           <i className="ri-bard-fill"></i> Popular
         </Link>
         <Link
           to="/movies"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
         >
           <i className="ri-movie-2-fill"></i> Movies
         </Link>
         <Link
           to="/tv_shows"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
         >
           <i className="ri-tv-2-fill"></i> Tv Shows
         </Link>
         <Link
           to="/people"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5"
+          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
         >
           <i className="ri-team-fill"></i> People
         </Link>
@@ -61,10 +61,10 @@ const Sidenav = () => {
           Website Information
         </h1>
 
-        <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5">
+        <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg hover:scale-105 duration-200 p-5">
           <i className="ri-information-fill"></i> About
         </Link>
-        <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5">
+        <Link className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5">
           <i className="ri-phone-fill"></i> Contact Us
         </Link>
       </nav>
