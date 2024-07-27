@@ -214,6 +214,7 @@ const PeopleDetails = () => {
       <TrendingCards
         data={info.movieCredits.cast.length > 0 && info.movieCredits.cast}
         title="movies"
+        animated={info.movieCredits.cast.length > 6 && true}
       />
 
       {/* Part 6 tv shows*/}
@@ -225,6 +226,7 @@ const PeopleDetails = () => {
       <TrendingCards
         data={info.tvCredits.cast.length > 0 && info.tvCredits.cast}
         title="tv_shows"
+        animated={info.tvCredits.cast.length > 6 && true}
       />
     </div>
   ) : (

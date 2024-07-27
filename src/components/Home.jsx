@@ -29,8 +29,17 @@ const Home = () => {
     setTrendingData(data.results);
   };
 
-  useLayoutEffect(() => {
-    !headerData && getHeaderData();
+  useEffect(() => {
+    getHeaderData();
+
+    const id = setInterval(() => {
+      getHeaderData();
+    }, 10000);
+
+    return () => clearInterval(id);
+  }, [category]);
+
+  useEffect(() => {
     getTrendingData();
   }, [category]);
 
