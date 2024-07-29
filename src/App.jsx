@@ -14,6 +14,7 @@ import PeopleDetails from "./components/PeopleDetails";
 import Trailer from "./components/templates/Trailer";
 import NotFound from "./components/NotFound";
 import SeasonDetails from "./components/SeasonDetails";
+import ContactUs from "./components/ContactUs";
 
 const App = () => {
   // const locomotiveScroll = new LocomotiveScroll();
@@ -49,6 +50,8 @@ const App = () => {
         <Route path="/people/details/:id" element={<PeopleDetails />} />
         <Route path="/people" element={<People />} />
         <Route path="*" element={<NotFound />} />
+
+        <Route path="/contact_us" element={<ContactUs />} />
       </Routes>
     </div>
   );
