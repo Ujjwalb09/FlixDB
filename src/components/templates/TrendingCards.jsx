@@ -10,6 +10,7 @@ const TrendingCards = ({
   seriesId,
   title,
   animated = false,
+  speed = 60,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const controls = useAnimation();
@@ -115,7 +116,7 @@ const TrendingCards = ({
               transition: {
                 x: {
                   repeat: Infinity,
-                  duration: 60,
+                  duration: speed,
                   ease: "linear",
                 },
               },

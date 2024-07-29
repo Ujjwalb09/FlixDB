@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { asyncLoadPeople } from "../store/actions/peopleAction";
+import { asyncLoadPeople, removePeople } from "../store/actions/peopleAction";
 import Topnav from "./templates/Topnav";
 import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
@@ -14,8 +14,12 @@ const PeopleDetails = () => {
 
   const { info } = useSelector((state) => state.people);
 
+  console.log(info);
+
   useEffect(() => {
     dispatch(asyncLoadPeople(id));
+
+    return () => dispatch(removePeople());
   }, [id]);
 
   useEffect(() => {
@@ -215,6 +219,7 @@ const PeopleDetails = () => {
         data={info.movieCredits.cast.length > 0 && info.movieCredits.cast}
         title="movies"
         animated={info.movieCredits.cast.length > 6 && true}
+        speed={info.movieCredits.cast.length > 40 && 200}
       />
 
       {/* Part 6 tv shows*/}
