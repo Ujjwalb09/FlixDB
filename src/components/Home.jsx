@@ -34,10 +34,10 @@ const Home = () => {
 
     const id = setInterval(() => {
       getHeaderData();
-    }, 10000);
+    }, 8000);
 
     return () => clearInterval(id);
-  }, [category]);
+  }, []);
 
   useEffect(() => {
     getTrendingData();

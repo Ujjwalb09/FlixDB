@@ -294,9 +294,12 @@ const MovieDetails = () => {
       {/* Part 4 recommendations and similar*/}
       <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
-      <h1 className="text-3xl font-bold text-white mt-10 pl-5">
-        {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
-      </h1>
+      {info.recommendations ||
+        (info.similar && (
+          <h1 className="text-3xl font-bold text-white mt-10 pl-5">
+            {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
+          </h1>
+        ))}
       <TrendingCards
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
