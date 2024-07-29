@@ -6,6 +6,7 @@ import axios from "../utils/axios";
 import TrendingCards from "./templates/TrendingCards";
 import Dropdown from "./templates/Dropdown";
 import Loading from "./Loading";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   document.title = "FlixDB | Homepage";
@@ -95,6 +96,7 @@ const Home = () => {
           <TrendingCards data={trendingData} animated={true} />
         </div>
       </div>
+      <Outlet />
     </div>
   ) : (
     <Loading />

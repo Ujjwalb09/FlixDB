@@ -21,7 +21,10 @@ const App = () => {
   return (
     <div className="bg-[#1F1E24] w-screen h-screen flex">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route path="/contact_us" element={<ContactUs />} />
+        </Route>
+
         <Route path="/trending" element={<Trending />} />
         <Route path="/popular" element={<Popular />} />
 
@@ -50,8 +53,6 @@ const App = () => {
         <Route path="/people/details/:id" element={<PeopleDetails />} />
         <Route path="/people" element={<People />} />
         <Route path="*" element={<NotFound />} />
-
-        <Route path="/contact_us" element={<ContactUs />} />
       </Routes>
     </div>
   );
