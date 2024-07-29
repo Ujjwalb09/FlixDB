@@ -140,7 +140,6 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-
       {/* {part 2 poster and details} */}
       <div className="w-full flex mt-32">
         <img
@@ -242,7 +241,6 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-
       {/*part 3 available platforms/watchproviders*/}
       <div className="w-[80%] flex flex-col gap-y-5 mt-10">
         {info.watchProvider && info.watchProvider.flatrate && (
@@ -293,13 +291,13 @@ const MovieDetails = () => {
 
       {/* Part 4 recommendations and similar*/}
       <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
-
-      {info.recommendations.length > 0 ||
-        (info.similar.length && (
-          <h1 className="text-3xl font-bold text-white mt-10 pl-5">
-            {info.recommendations.length > 0 ? "Recommendations" : "Similar"}
-          </h1>
-        ))}
+      <h1 className="text-3xl font-bold text-white mt-10 pl-5">
+        {info.recommendations.length > 0
+          ? "Recommendations"
+          : info.similar.length > 0
+          ? "Similar"
+          : ""}
+      </h1>
       <TrendingCards
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
@@ -307,7 +305,6 @@ const MovieDetails = () => {
         title="movies"
         animated={true}
       />
-
       <Outlet />
     </div>
   ) : (
