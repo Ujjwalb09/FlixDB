@@ -59,7 +59,7 @@ const TvShowDetails = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { pathname } = useLocation();
   const { info } = useSelector((state) => state.tv);
-  // console.log(info);
+  console.log(info);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -177,7 +177,9 @@ const TvShowDetails = () => {
           <h1 className="text-2xl font-semibold italic text-zinc-200">
             {info.details.tagline}
           </h1>
-          <h1 className="mb-3 text-2xl mt-5">Overview</h1>
+          {info.details.overview && (
+            <h1 className="mb-3 text-2xl mt-5">Overview</h1>
+          )}
           <p className="mb-7">{info.details.overview}</p>
 
           <Link
@@ -199,37 +201,45 @@ const TvShowDetails = () => {
             )}
 
             <div className="flex gap-8 mt-8">
-              <a
-                target="_blank"
-                href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
-                className="hover:scale-125"
-              >
-                <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] duration-200"></i>
-              </a>
+              {info.external_ids.facebook_id && (
+                <a
+                  target="_blank"
+                  href={`https://www.facebook.com/${info.external_ids.facebook_id}`}
+                  className="hover:scale-125"
+                >
+                  <i className="ri-facebook-circle-fill text-[30px] text-[#E9C46A] duration-200"></i>
+                </a>
+              )}
 
-              <a
-                target="_blank"
-                href={`https://x.com/${info.external_ids.twitter_id}`}
-                className="hover:scale-125"
-              >
-                <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
-              </a>
+              {info.external_ids.twitter_id && (
+                <a
+                  target="_blank"
+                  href={`https://x.com/${info.external_ids.twitter_id}`}
+                  className="hover:scale-125"
+                >
+                  <i className="ri-twitter-fill text-[30px] text-[#E9C46A] duration-200"></i>
+                </a>
+              )}
 
-              <a
-                target="_blank"
-                href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
-                className="hover:scale-125"
-              >
-                <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
-              </a>
+              {info.external_ids.instagram_id && (
+                <a
+                  target="_blank"
+                  href={`https://www.instagram.com/${info.external_ids.instagram_id}`}
+                  className="hover:scale-125"
+                >
+                  <i className="ri-instagram-fill text-[30px] text-[#E9C46A] duration-200"></i>
+                </a>
+              )}
 
-              <a
-                target="_blank"
-                href={`${info.details.homepage}`}
-                className="hover:scale-125"
-              >
-                <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
-              </a>
+              {info.details.homepage && (
+                <a
+                  target="_blank"
+                  href={`${info.details.homepage}`}
+                  className="hover:scale-125"
+                >
+                  <i className="ri-link-unlink-m text-[30px] text-[#E9C46A] duration-200"></i>
+                </a>
+              )}
             </div>
           </div>
         </div>

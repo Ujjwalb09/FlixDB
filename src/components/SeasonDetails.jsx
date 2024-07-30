@@ -168,7 +168,9 @@ const SeasonDetails = () => {
             </div>
           </div>
 
-          <h1 className="mb-3 text-2xl mt-5">Overview</h1>
+          {info.details.overview && (
+            <h1 className="mb-3 text-2xl mt-5">Overview</h1>
+          )}
           <p className="mb-7">{info.details.overview}</p>
 
           {info.videos && (
