@@ -8,9 +8,13 @@ const ContactUs = () => {
     <div className="bg-[rgba(0,0,0,.7)] absolute z-[100] top-0 left-0 w-screen h-screen flex items-center justify-center">
       <Link
         to="/"
-        className="hover:text-[#E9C46A] ri-arrow-left-line mr-5 absolute text-2xl text-white left-[15%] top-[15%] hover:scale-110
+        className="hover:text-[#E9C46A] mr-5 absolute text-2xl text-white left-[15%] top-[15%] hover:scale-110
         "
       >
+        <i
+          onClick={() => navigate(-1)}
+          className="hover:text-[#E9C46A] ri-arrow-left-line mr-2"
+        ></i>
         Back
       </Link>{" "}
       <div class="max-w-md w-full bg-[#F5EDED] rounded-lg shadow-lg p-6">
