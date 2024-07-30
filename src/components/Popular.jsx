@@ -69,7 +69,7 @@ const Popular = () => {
         <h1 className="flex text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => navigate("/")}
-            className="hover:text-[#E9C46A] ri-arrow-left-line mr-5"
+            className="hover:text-[#E9C46A] ri-arrow-left-line mr-5 hover:scale-110"
           ></i>{" "}
           <Link to="/">
             <i className="text-[#E9C46A] ri-movie-fill mr-2"></i>
