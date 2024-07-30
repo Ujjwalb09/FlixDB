@@ -10,7 +10,7 @@ const TrendingCards = ({
   seriesId,
   title,
   animated = false,
-  speed = 60,
+  speed = 65,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const controls = useAnimation();
