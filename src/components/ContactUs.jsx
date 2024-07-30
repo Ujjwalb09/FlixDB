@@ -13,18 +13,15 @@ const ContactUs = () => {
       >
         Back
       </Link>{" "}
-      <div class="max-w-md w-full bg-gray-700 rounded-lg shadow-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-white">Contact Us</h2>
+      <div class="max-w-md w-full bg-[#F5EDED] rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-bold mb-4 text-black">Contact Us</h2>
         <form>
           <div class="mb-4">
-            <label
-              class="block text-gray-300 text-sm font-bold mb-2"
-              for="name"
-            >
+            <label class="block text-black text-sm font-bold mb-2" for="name">
               Name
             </label>
             <input
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-800"
+              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="name"
               type="text"
               placeholder="Your Name"
@@ -32,14 +29,11 @@ const ContactUs = () => {
             />
           </div>
           <div class="mb-4">
-            <label
-              class="block text-gray-300 text-sm font-bold mb-2"
-              for="email"
-            >
+            <label class="block text-black text-sm font-bold mb-2" for="email">
               Email
             </label>
             <input
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-800"
+              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="email"
               type="email"
               placeholder="Your Email"
@@ -48,13 +42,13 @@ const ContactUs = () => {
           </div>
           <div class="mb-4">
             <label
-              class="block text-gray-300 text-sm font-bold mb-2"
+              class="block text-black text-sm font-bold mb-2"
               for="message"
             >
               Message
             </label>
             <textarea
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-800"
+              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="message"
               rows="4"
               placeholder="Your Message"
@@ -64,8 +58,9 @@ const ContactUs = () => {
           <div class="flex items-center justify-between">
             <button
               type="submit"
-              class="bg-[#E9C46A]  hover:bg-[#AF9350] hover:scale-105 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-[#E9C46A]  hover:bg-[#AF9350] hover:scale-105 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline flex gap-1"
             >
+              <i class="ri-send-plane-fill"></i>
               Send
             </button>
           </div>
