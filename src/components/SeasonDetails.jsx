@@ -163,7 +163,7 @@ const SeasonDetails = () => {
               percentage={(info.details.vote_average * 10).toFixed(0)}
             />
             <div className="text-[#E9C46A] flex gap-2">
-              <span className="text-xl ml-3">•</span>
+              {info.details.air_date && <span className="text-xl ml-3">•</span>}
               <h1>{info.details.air_date}</h1>
             </div>
           </div>
