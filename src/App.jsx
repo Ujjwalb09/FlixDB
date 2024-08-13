@@ -53,7 +53,12 @@ const App = () => {
         <Route
           path="/tv_shows/:seriesId/:showName/season/:season/episode/:episode"
           element={<EpisodeDetails />}
-        />
+        >
+          <Route
+            path="/tv_shows/:seriesId/:showName/season/:season/episode/:episode/trailer/:index"
+            element={<Trailer />}
+          />
+        </Route>
 
         <Route path="/people/details/:id" element={<PeopleDetails />} />
         <Route path="/people" element={<People />} />

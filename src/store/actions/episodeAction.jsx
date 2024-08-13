@@ -14,7 +14,7 @@ export const asyncLoadEpisode =
 
       let episodeDetailsObj = {
         details: details.data,
-        videos: videos.data.results.find((obj) => obj.type === "Trailer"),
+        videos: videos.data.results,
       };
 
       dispatch(loadEpisode(episodeDetailsObj));
