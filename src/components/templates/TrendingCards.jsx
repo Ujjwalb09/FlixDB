@@ -12,6 +12,7 @@ const TrendingCards = ({
   animated = false,
   speed = 65,
   season,
+  episode = false,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const controls = useAnimation();
@@ -31,7 +32,7 @@ const TrendingCards = ({
           : d.media_type === "movie"
           ? `/movies/details/${d.id}`
           : `/tv_shows/details/${d.id}`
-        : !d.name.startsWith("Episode")
+        : !episode
         ? `/tv_shows/${seriesId}/${encodeForUrl(
             showName
           )}/season/${seasonIndex}`
@@ -72,7 +73,12 @@ const TrendingCards = ({
           </div>
           <div className="mt-3">
             <h1 className="text-base text-white font-semibold line-clamp-2">
-              {d.name || d.title || d.original_name || d.original_title}
+              {episode
+                ? `Episode ${episodeIndex - 1}: ` + d.name ||
+                  d.title ||
+                  d.original_name ||
+                  d.original_title
+                : d.name || d.title || d.original_name || d.original_title}
             </h1>
             <p className="text-sm text-gray-400 mt-1">
               {d.release_date || d.first_air_date || d.air_date

@@ -15,6 +15,7 @@ import Trailer from "./components/templates/Trailer";
 import NotFound from "./components/NotFound";
 import SeasonDetails from "./components/SeasonDetails";
 import ContactUs from "./components/ContactUs";
+import EpisodeDetails from "./components/EpisodeDetails";
 
 const App = () => {
   // const locomotiveScroll = new LocomotiveScroll();
@@ -49,6 +50,10 @@ const App = () => {
             element={<Trailer />}
           />
         </Route>
+        <Route
+          path="/tv_shows/:seriesId/:showName/season/:season/episode/:episode"
+          element={<EpisodeDetails />}
+        />
 
         <Route path="/people/details/:id" element={<PeopleDetails />} />
         <Route path="/people" element={<People />} />
