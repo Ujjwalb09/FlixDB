@@ -302,7 +302,7 @@ const TvShowDetails = () => {
             data={info.details.seasons}
             showName={info.details.name}
             seriesId={info.details.id}
-            animated={info.details.seasons.length > 6 ? true : false}
+            animated={info.details.seasons.length > 6 && true}
           />
         </div>
       )}

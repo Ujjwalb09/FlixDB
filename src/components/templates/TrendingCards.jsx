@@ -11,6 +11,7 @@ const TrendingCards = ({
   title,
   animated = false,
   speed = 65,
+  season,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const controls = useAnimation();
@@ -19,7 +20,7 @@ const TrendingCards = ({
     return encodeURIComponent(str).replace(/%20/g, "-");
   };
 
-  const renderCards = (data, seasonIndex) => {
+  const renderCards = (data, seasonIndex, episodeIndex) => {
     return data.map((d, i) => {
       if (d.name === "Specials") {
         return null;
@@ -30,10 +31,15 @@ const TrendingCards = ({
           : d.media_type === "movie"
           ? `/movies/details/${d.id}`
           : `/tv_shows/details/${d.id}`
+        : !d.name.startsWith("Episode")
+        ? `/tv_shows/${seriesId}/${encodeForUrl(
+            showName
+          )}/season/${seasonIndex}`
         : `/tv_shows/${seriesId}/${encodeForUrl(
             showName
-          )}/season/${seasonIndex}`;
+          )}/season/${season}/episode/${episodeIndex}`;
       seasonIndex++;
+      episodeIndex++;
       return (
         <Link
           to={path}
@@ -44,9 +50,15 @@ const TrendingCards = ({
             <img
               className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-2xl"
               src={
-                d.poster_path || d.backdrop_path || d.profile_path
+                d.poster_path ||
+                d.backdrop_path ||
+                d.profile_path ||
+                d.still_path
                   ? `https://image.tmdb.org/t/p/original/${
-                      d.poster_path || d.backdrop_path || d.profile_path
+                      d.poster_path ||
+                      d.backdrop_path ||
+                      d.profile_path ||
+                      d.still_path
                     }`
                   : noImageFound
               }
@@ -123,15 +135,15 @@ const TrendingCards = ({
             },
           }}
         >
-          {renderCards(data, 1)}
-          {renderCards(data, 1)}
+          {renderCards(data, 1, 1)}
+          {renderCards(data, 1, 1)}
         </motion.div>
       </div>
     );
   } else {
     return (
       <div className="w-full flex overflow-y-hidden px-5 pt-5 mb-5">
-        {renderCards(data, 1)}
+        {renderCards(data, 1, 1)}
       </div>
     );
   }

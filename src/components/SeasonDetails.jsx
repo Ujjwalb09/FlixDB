@@ -70,8 +70,6 @@ const SeasonDetails = () => {
 
   const { info } = useSelector((state) => state.season);
 
-  // console.log(info);
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -135,7 +133,6 @@ const SeasonDetails = () => {
           </div>
         </div>
       </div>
-
       {/* {part 2 poster and details} */}
       <div className="w-full flex mt-32">
         <img
@@ -184,20 +181,21 @@ const SeasonDetails = () => {
           )}
         </div>
       </div>
-
-      {/* Part 4 episodes
-      {info.details.seasons.length > 0 && (
+      Part 4 episodes
+      {info.details.episodes.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
-          <h1 className="text-3xl font-bold text-white mt-10 pl-5">Seasons</h1>
+          <h1 className="text-3xl font-bold text-white mt-10 pl-5">Episodes</h1>
           <TrendingCards
-            data={info.details.seasons}
-            showName={info.details.name}
+            data={info.details.episodes}
+            showName={showName}
+            seriesId={seriesId}
+            season={season}
+            animated={info.details.episodes.length > 5 && true}
           />
         </div>
-      )} */}
-
+      )}
       {/* Part 5 recommendations and similar*/}
       {/* <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
@@ -213,7 +211,6 @@ const SeasonDetails = () => {
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
       /> */}
-
       <Outlet />
     </div>
   ) : (
