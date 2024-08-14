@@ -4,7 +4,6 @@ import { loadSeason } from "../reducers/seasonSlice";
 
 export const asyncLoadSeason =
   (seriesId, seasonNumber) => async (dispatch, getState) => {
-    console.log(seriesId, seasonNumber);
     try {
       const details = await axios.get(`/tv/${seriesId}/season/${seasonNumber}`);
       const videos = await axios.get(

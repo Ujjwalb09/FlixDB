@@ -83,7 +83,11 @@ const EpisodeDetails = () => {
     };
   }, [episode]);
 
-  console.log(info);
+  useEffect(() => {
+    info
+      ? (document.title = `S:${season} Ep:${episode} | ${info.details.name}`)
+      : "FlixDB";
+  }, [info]);
 
   useEffect(() => {
     dispatch(asyncLoadSeason(seriesId, season));
@@ -172,7 +176,7 @@ const EpisodeDetails = () => {
           <h1 className="text-5xl font-black text-white ">
             {info.details.name}{" "}
             <small className="text-2xl font-bold text-zinc-300">
-              {showName.split("-").join(" ")} S:{season} E:{episode}
+              {showName.split("-").join(" ")} S:{season} Ep:{episode}
             </small>
           </h1>
 
@@ -233,7 +237,6 @@ const EpisodeDetails = () => {
             season={season}
             animated={seasonInfo.details.episodes.length > 5 && true}
             episode={true}
-            speed={seasonInfo.details.episodes.length > 40 && 200}
           />
         </div>
       )}

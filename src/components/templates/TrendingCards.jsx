@@ -125,10 +125,6 @@ const TrendingCards = React.memo(
       return { cardWidth, gap, totalWidth, duration };
     }, [data.length, speed]);
 
-    console.log(
-      `Speed: ${speed}, TotalWidth: ${totalWidth}, Duration: ${duration}`
-    );
-
     if (animated) {
       return (
         <div

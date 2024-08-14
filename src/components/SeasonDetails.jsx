@@ -69,7 +69,6 @@ const SeasonDetails = () => {
   const { pathname } = useLocation();
 
   const { info } = useSelector((state) => state.season);
-  console.log(info);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,6 +86,10 @@ const SeasonDetails = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    info ? (document.title = `FlixDB | ${info.details.name}`) : "FlixDB";
+  }, [info]);
 
   useEffect(() => {
     dispatch(asyncLoadSeason(seriesId, season));
@@ -195,7 +198,6 @@ const SeasonDetails = () => {
             season={season}
             animated={info.details.episodes.length > 5 && true}
             episode={true}
-            // speed={info.details.episodes.length > 40 && 200}
           />
         </div>
       )}

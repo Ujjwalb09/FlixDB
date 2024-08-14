@@ -232,7 +232,6 @@ const PeopleDetails = () => {
         data={info.tvCredits.cast.length > 0 && info.tvCredits.cast}
         title="tv_shows"
         animated={info.tvCredits.cast.length > 6 && true}
-        // speed={info.tvCredits.cast.length > 40 && 195}
       />
     </div>
   ) : (
