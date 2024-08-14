@@ -25,7 +25,7 @@ const ContactUs = () => {
               Name
             </label>
             <input
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="name"
               type="text"
               placeholder="Your Name"
@@ -37,7 +37,7 @@ const ContactUs = () => {
               Email
             </label>
             <input
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="email"
               type="email"
               placeholder="Your Email"
@@ -52,7 +52,7 @@ const ContactUs = () => {
               Message
             </label>
             <textarea
-              class="shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
+              class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-[#F5EDED] "
               id="message"
               rows="4"
               placeholder="Your Message"

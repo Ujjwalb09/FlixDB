@@ -105,7 +105,7 @@ const SeasonDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[205vh] px-[10%]"
+      className="relative w-screen h-[150vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -195,6 +195,7 @@ const SeasonDetails = () => {
             season={season}
             animated={info.details.episodes.length > 5 && true}
             episode={true}
+            speed={info.details.episodes.length > 40 && 200}
           />
         </div>
       )}

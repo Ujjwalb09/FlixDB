@@ -233,6 +233,7 @@ const EpisodeDetails = () => {
             season={season}
             animated={seasonInfo.details.episodes.length > 5 && true}
             episode={true}
+            speed={seasonInfo.details.episodes.length > 40 && 200}
           />
         </div>
       )}
