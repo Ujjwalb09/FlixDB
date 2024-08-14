@@ -17,6 +17,8 @@ import NoImageFound from "../../public/noImage.jpg";
 import { removeSeason } from "../store/reducers/seasonSlice";
 import TrendingCards from "./templates/TrendingCards";
 import { asyncLoadSeason } from "../store/actions/seasonAction";
+import { removeTvShow } from "../store/reducers/tvShowSlice";
+import { asyncLoadTvShow } from "../store/actions/tvShowActions";
 
 const CircularProgress = ({ percentage }) => {
   const circleWidth = 60;
@@ -94,6 +96,15 @@ const EpisodeDetails = () => {
     return () => dispatch(removeSeason());
   }, [episode]);
 
+  useEffect(() => {
+    dispatch(asyncLoadTvShow(seriesId));
+
+    return () => dispatch(removeTvShow());
+  }, [seriesId]);
+
+  const seriesInfo = useSelector((state) => state.tv.info);
+  console.log(seriesInfo);
+
   const seasonInfo = useSelector((state) => state.season.info);
 
   useEffect(() => {
@@ -125,7 +136,7 @@ const EpisodeDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[150vh] px-[10%]"
+      className="relative w-screen h-[200vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -224,7 +235,7 @@ const EpisodeDetails = () => {
           )}
         </div>
       </div>
-      {/* Part 4 remaining episodes */}
+      {/* Part 4 episodes */}
       {seasonInfo && seasonInfo.details.episodes.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
@@ -237,6 +248,21 @@ const EpisodeDetails = () => {
             season={season}
             animated={seasonInfo.details.episodes.length > 5 && true}
             episode={true}
+          />
+        </div>
+      )}
+
+      {/* Part 5 seasons*/}
+      {seriesInfo.details.seasons.length > 0 && (
+        <div>
+          <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+
+          <h1 className="text-3xl font-bold text-white mt-10 pl-5">Seasons</h1>
+          <TrendingCards
+            data={seriesInfo.details.seasons}
+            showName={seriesInfo.details.name}
+            seriesId={seriesInfo.details.id}
+            animated={seriesInfo.details.seasons.length > 6 && true}
           />
         </div>
       )}

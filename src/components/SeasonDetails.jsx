@@ -12,6 +12,7 @@ import Loading from "./Loading";
 import TrendingCards from "./templates/TrendingCards";
 import Topnav from "./templates/Topnav";
 import NoImageFound from "../../public/noImage.jpg";
+import { asyncLoadTvShow, removeTvShow } from "../store/actions/tvShowActions";
 
 const CircularProgress = ({ percentage }) => {
   const circleWidth = 60;
@@ -67,6 +68,7 @@ const SeasonDetails = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  console.log(seriesId);
 
   const { info } = useSelector((state) => state.season);
 
@@ -97,6 +99,15 @@ const SeasonDetails = () => {
     return () => dispatch(removeSeason());
   }, [seriesId, season]);
 
+  useEffect(() => {
+    dispatch(asyncLoadTvShow(seriesId));
+
+    return () => dispatch(removeTvShow());
+  }, []);
+
+  const seriesInfo = useSelector((state) => state.tv.info);
+  console.log(seriesInfo);
+
   return info ? (
     <div
       style={{
@@ -108,7 +119,7 @@ const SeasonDetails = () => {
         backgroundPosition: "top 5% left 50%",
         backgroundSize: "cover",
       }}
-      className="relative w-screen h-[150vh] px-[10%]"
+      className="relative w-screen h-[200vh] px-[10%]"
     >
       {/* Search bar and logo */}
       <div
@@ -185,7 +196,7 @@ const SeasonDetails = () => {
           )}
         </div>
       </div>
-      Part 4 episodes
+      {/* Part 4 episodes */}
       {info.details.episodes.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
@@ -198,6 +209,21 @@ const SeasonDetails = () => {
             season={season}
             animated={info.details.episodes.length > 5 && true}
             episode={true}
+          />
+        </div>
+      )}
+
+      {/* Part 5 seasons*/}
+      {seriesInfo.details.seasons.length > 0 && (
+        <div>
+          <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
+
+          <h1 className="text-3xl font-bold text-white mt-10 pl-5">Seasons</h1>
+          <TrendingCards
+            data={seriesInfo.details.seasons}
+            showName={seriesInfo.details.name}
+            seriesId={seriesInfo.details.id}
+            animated={seriesInfo.details.seasons.length > 6 && true}
           />
         </div>
       )}
