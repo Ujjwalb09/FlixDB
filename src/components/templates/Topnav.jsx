@@ -23,7 +23,6 @@ const Topnav = () => {
   }, [query]);
 
   const handleClickOutside = (event) => {
-  
     if (
       searchContainerRef.current &&
       !searchContainerRef.current.contains(event.target)
@@ -87,7 +86,7 @@ const Topnav = () => {
                     ? `https://image.tmdb.org/t/p/original/${
                         s.backdrop_path || s.poster_path || s.profile_path
                       }`
-                    : "../../../noImage.jpg"
+                    : "../../../public/noImage.jpg"
                 }
                 alt=""
               />
