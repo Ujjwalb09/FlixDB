@@ -214,7 +214,7 @@ const SeasonDetails = () => {
       )}
 
       {/* Part 5 seasons*/}
-      {seriesInfo.details.seasons.length > 0 && (
+      {seriesInfo && seriesInfo.details.seasons.length > 0 && (
         <div>
           <hr className="border-t border-gray-500 opacity-50 my-4 mx-16 mt-10" />
 
