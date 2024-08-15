@@ -20,3 +20,4 @@ FlixDB is a dynamic movie database website built using the React JS library. It 
 - Axios: For making API calls to TMDB
 - Tailwind CSS: For designing the user interface
 - Framer Motion: For adding animations and enhancing visual appeal
+- Firebase: For deployment and hosting
