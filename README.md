@@ -1,6 +1,6 @@
 # FlixDB
 
-## [Live link](https://flixdb-a38b3.web.app)
+### <a href="https://flixdb-a38b3.web.app" target="_blank">Live link</a>
 https://github.com/user-attachments/assets/2a4ce7ae-62cf-49c1-9673-97d3d6dfe66e
 
 # Overview
