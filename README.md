@@ -1,5 +1,6 @@
 # FlixDB
 
+## [Live link](https://flixdb-a38b3.web.app)
 https://github.com/user-attachments/assets/2a4ce7ae-62cf-49c1-9673-97d3d6dfe66e
 
 # Overview
@@ -21,3 +22,4 @@ FlixDB is a dynamic movie database website built using the React JS library. It 
 - Tailwind CSS: For designing the user interface
 - Framer Motion: For adding animations and enhancing visual appeal
 - Firebase: For deployment and hosting
+
