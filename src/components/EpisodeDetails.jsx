@@ -210,7 +210,7 @@ const EpisodeDetails = () => {
           )}
           <p className="mb-7">{info.details.overview}</p>
 
-          {info.videos && (
+          {info.videos.length > 0 && (
             <div className="flex gap-5">
               {info.videos.length > 1 ? (
                 info.videos.map((clip, index) => (
