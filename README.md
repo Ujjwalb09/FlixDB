@@ -1,8 +1,20 @@
-# React + Vite
+# FlixDB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+FlixDB is a dynamic movie database website built using the React JS library. It allows users to explore trending movies and TV shows, all fetched directly from the TMDB API. The website features smooth animations that enhance the user experience, making it visually appealing and engaging. With a sleek design, FlixDB provides an intuitive interface for users to discover the latest in entertainment. The project focuses on frontend development, leveraging React’s capabilities to deliver a seamless user experience without the need for a backend infrastructure.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- View trending and popular TV shows and movies
+- Watch trailers of movies and TV shows
+- Find detailed information about seasons and episodes of specific TV shows
+- Search for favorite actors and discover their related movies
+
+## Technologies Used
+
+- React JS: For building the user interface
+- Redux Toolkit: For state management
+- Axios: For making API calls to TMDB
+- Tailwind CSS: For designing the user interface
+- Framer Motion: For adding animations and enhancing visual appeal
