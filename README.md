@@ -1,6 +1,7 @@
 # FlixDB
 
 ### <a target="_blank" href="https://flixdb-a38b3.web.app">Live link</a>
+
 https://github.com/user-attachments/assets/2a4ce7ae-62cf-49c1-9673-97d3d6dfe66e
 
 # Overview
@@ -22,4 +23,4 @@ https://github.com/user-attachments/assets/2a4ce7ae-62cf-49c1-9673-97d3d6dfe66e
 - **Tailwind CSS:** For designing the user interface
 - **Framer Motion:** For adding animations and enhancing visual appeal
 - **Firebase:** For deployment and hosting
-
+- **React Player:** For seamlessly integrating and displaying video trailers and clips
