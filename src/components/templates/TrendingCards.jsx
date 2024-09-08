@@ -46,7 +46,7 @@ const TrendingCards = React.memo(
           return (
             <Link
               to={path}
-              className="min-w-[15%] w-[15%] mr-5 mb-5 hover:scale-105 flex flex-col"
+              className="min-w-[50%] sm:min-w-[33.333%] md:min-w-[25%] lg:min-w-[20%] xl:min-w-[15%] w-[50%] sm:w-[33.333%] md:w-[25%] lg:w-[20%] xl:w-[15%] pr-4 mb-5 hover:scale-105 flex flex-col"
               key={i}
             >
               <div className="relative aspect-[2/3] w-full">
@@ -76,15 +76,13 @@ const TrendingCards = React.memo(
                 )}
               </div>
               <div className="mt-3">
-                <h1 className="text-base text-white font-semibold line-clamp-2">
+                <h1 className="text-sm sm:text-base text-white font-semibold line-clamp-2">
                   {episode
-                    ? `Episode ${episodeIndex - 1}: ` + d.name ||
-                      d.title ||
-                      d.original_name ||
-                      d.original_title
+                    ? `Episode ${episodeIndex - 1}: ` +
+                      (d.name || d.title || d.original_name || d.original_title)
                     : d.name || d.title || d.original_name || d.original_title}
                 </h1>
-                <p className="text-sm text-gray-400 mt-1">
+                <p className="text-xs sm:text-sm text-gray-400 mt-1">
                   {d.release_date || d.first_air_date || d.air_date
                     ? new Date(
                         d.release_date || d.first_air_date || d.air_date
@@ -130,7 +128,7 @@ const TrendingCards = React.memo(
         <div
           className={`w-full ${
             isHovered ? "overflow-x-auto" : "overflow-hidden"
-          } px-5 pt-5 mb-5`}
+          } px-2 sm:px-4 md:px-5 pt-5 mb-5`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -158,7 +156,7 @@ const TrendingCards = React.memo(
       );
     } else {
       return (
-        <div className="w-full flex overflow-y-hidden px-5 pt-5 mb-5">
+        <div className="w-full flex flex-wrap overflow-y-hidden px-2 sm:px-4 md:px-5 pt-5 mb-5">
           {renderCards(data, 1, 1)}
         </div>
       );
