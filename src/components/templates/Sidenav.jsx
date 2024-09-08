@@ -1,78 +1,107 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../../utils/axios";
 
-const Sidenav = () => {
-  //E9C46A #6556CD
+export default function Sidenav() {
+  const sidenavRef = useRef(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const adjustHeight = () => {
+      if (sidenavRef.current) {
+        const windowHeight = window.innerHeight;
+        if (windowHeight <= 700) {
+          sidenavRef.current.style.height = `${windowHeight}px`;
+          sidenavRef.current.style.overflowY = "auto";
+          setIsSmallScreen(true);
+        } else {
+          sidenavRef.current.style.height = "auto";
+          sidenavRef.current.style.overflowY = "visible";
+          setIsSmallScreen(false);
+        }
+      }
+    };
+
+    adjustHeight();
+    window.addEventListener("resize", adjustHeight);
+
+    return () => window.removeEventListener("resize", adjustHeight);
+  }, []);
+
+  const linkClass = `hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 hover:scale-105 ${
+    isSmallScreen ? "p-3 text-base" : "p-5 text-xl"
+  }`;
+
   return (
-    <div className="w-[20%] h-full border-r-2 border-zinc-400 p-10">
+    <div
+      ref={sidenavRef}
+      className="w-[20%] h-full border-r-2 border-zinc-400 p-6 overflow-x-hidden"
+    >
       <a href="/">
-        <h1 className="text-2xl text-white font-bold">
-          {/* <i className="text-[#E9C46A] ri-tv-fill mr-3"></i> */}
-          <i className="text-[#E9C46A] ri-movie-fill mr-3"></i>
-
-          <span className="text-2xl text-[#E7F0DC]">
+        <h1
+          className={`text-white font-bold ${
+            isSmallScreen ? "text-xl" : "text-2xl"
+          }`}
+        >
+          <i
+            className="text-[#E9C46A] ri-movie-fill mr-2"
+            aria-hidden="true"
+          ></i>
+          <span className="text-[#E7F0DC]">
             Flix<span className="text-[#E9C46A]">DB</span>
           </span>
         </h1>
       </a>
 
-      <nav className="flex flex-col text-zinc-400 text-xl gap-3">
-        <h1 className="text-white font-semibold text-xl mt-10 mb-5">
+      <nav
+        className={`flex flex-col text-zinc-400 gap-2 mt-6 ${
+          isSmallScreen ? "text-base" : "text-xl"
+        }`}
+      >
+        <h2
+          className={`text-white font-semibold mb-3 ${
+            isSmallScreen ? "text-lg" : "text-xl"
+          }`}
+        >
           New Feeds
-        </h1>
-
-        <Link
-          to="/trending"
-          className="hover:bg-[#E9C46A] hover:text-white rounded-lg duration-200 p-5 hover:scale-105"
-        >
-          <i className="ri-fire-fill"></i> Trending
+        </h2>
+        <Link to="/trending" className={linkClass}>
+          <i className="ri-fire-fill mr-2" aria-hidden="true"></i> Trending
         </Link>
-        <Link
-          to="/popular"
-          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
-        >
-          <i className="ri-bard-fill"></i> Popular
+        <Link to="/popular" className={linkClass}>
+          <i className="ri-bard-fill mr-2" aria-hidden="true"></i> Popular
         </Link>
-        <Link
-          to="/movies"
-          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
-        >
-          <i className="ri-movie-2-fill"></i> Movies
+        <Link to="/movies" className={linkClass}>
+          <i className="ri-movie-2-fill mr-2" aria-hidden="true"></i> Movies
         </Link>
-        <Link
-          to="/tv_shows"
-          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
-        >
-          <i className="ri-tv-2-fill"></i> Tv Shows
+        <Link to="/tv_shows" className={linkClass}>
+          <i className="ri-tv-2-fill mr-2" aria-hidden="true"></i> Tv Shows
         </Link>
-        <Link
-          to="/people"
-          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
-        >
-          <i className="ri-team-fill"></i> People
+        <Link to="/people" className={linkClass}>
+          <i className="ri-team-fill mr-2" aria-hidden="true"></i> People
         </Link>
       </nav>
 
-      <hr className="border-none h-[1px] bg-zinc-400" />
+      <hr className="border-none h-[1px] bg-zinc-400 my-4" />
 
-      <nav className="flex flex-col text-zinc-400 text-xl gap-3">
-        <h1 className="text-white font-semibold text-xl mt-10 mb-5">
-          Website Information
-        </h1>
-
-        <Link className="hover:bg-[#E9C46A] hover:text-white rounded-lg hover:scale-105 duration-200 p-5">
-          <i className="ri-information-fill"></i> About
-        </Link>
-        <Link
-          to="/contact_us"
-          className="hover:bg-[#E9C46A] hover:text-white hover:scale-105 rounded-lg duration-200 p-5"
+      <nav
+        className={`flex flex-col text-zinc-400 gap-2 ${
+          isSmallScreen ? "text-base" : "text-xl"
+        }`}
+      >
+        <h2
+          className={`text-white font-semibold mb-3 ${
+            isSmallScreen ? "text-lg" : "text-xl"
+          }`}
         >
-          <i className="ri-phone-fill"></i> Contact Us
+          Website Information
+        </h2>
+        <Link to="/about" className={linkClass}>
+          <i className="ri-information-fill mr-2" aria-hidden="true"></i> About
+        </Link>
+        <Link to="/contact_us" className={linkClass}>
+          <i className="ri-phone-fill mr-2" aria-hidden="true"></i> Contact Us
         </Link>
       </nav>
     </div>
   );
-};
-
-export default Sidenav;
+}
